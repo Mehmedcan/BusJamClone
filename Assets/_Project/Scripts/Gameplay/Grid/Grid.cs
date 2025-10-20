@@ -26,21 +26,19 @@ namespace _Project.Scripts.Gameplay.Grid
         private Vector2Int _coordinates;
         private MeshRenderer _meshRenderer;
         private Action<int, int> _onClick;
+        private Func<Transform, GameObject> _getStickmanFromPool;
         
         // Data for stickman transform
         private static readonly Vector3 StickmanLocalPosition = new Vector3(0, 0.5f, 0);
         private static readonly Vector3 StickmanLocalRotation = new Vector3(0, 0, 0);
         private static readonly Vector3 StickmanLocalScale = new Vector3(.68f, 3.4f, .68f);
-
-        private IPoolManager _poolManager;
         
-        public void Initialize(GridCellConfig gridCellConfig, Action<int, int> onClick)
+        public void Initialize(GridCellConfig gridCellConfig, Action<int, int> onClick, Func<Transform, GameObject> getStickmanFromPool)
         {
-            Locator.Instance.TryResolve(out _poolManager);
-            
             _meshRenderer = GetComponent<MeshRenderer>();
             _coordinates = new Vector2Int(gridCellConfig.x, gridCellConfig.y);
             _onClick = onClick;
+            _getStickmanFromPool = getStickmanFromPool;
             
             _humanType = gridCellConfig.humanType;
             Type = gridCellConfig.gridType;
@@ -74,7 +72,7 @@ namespace _Project.Scripts.Gameplay.Grid
                 return;
             }
 
-            var stickman = _poolManager.Get(GameConstants.STICKMAN_POOL_KEY, transform);
+            var stickman = _getStickmanFromPool(transform);
             stickman.transform.localPosition = StickmanLocalPosition;
             stickman.transform.localEulerAngles = StickmanLocalRotation;
             stickman.transform.localScale = StickmanLocalScale;

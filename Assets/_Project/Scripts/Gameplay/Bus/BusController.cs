@@ -29,6 +29,7 @@ namespace _Project.Scripts.Gameplay.Bus
         
         private const int DelayBetweenBusSpawns = 100; // milliseconds
         
+        private List<GameObject> _pooledBuses = new();
         private IPoolManager _poolManager;
         
         public void Initialize(int busCount, List<HumanType> busHumanTypes)
@@ -45,14 +46,14 @@ namespace _Project.Scripts.Gameplay.Bus
 			// initial setup: spawn the first (main) bus, and optionally the waiting bus
 			if (_currentBusCount == 0)
 			{
-				_mainBus = _poolManager.Get(GameConstants.BUS_POOL_KEY, transform).GetComponent<Bus>();
+				_mainBus = GetBusFromPool();
 				await MoveBusToPosition(_mainBus, _busHumanTypes[_currentBusCount], busSpawnTransform, busMainTransform);
 				_currentBusCount++;
 
 				if (_totalBusCount > 1)
 				{
 					await UniTask.Delay(DelayBetweenBusSpawns);
-					_waitingBus = _poolManager.Get(GameConstants.BUS_POOL_KEY, transform).GetComponent<Bus>();
+					_waitingBus = GetBusFromPool();
 					await MoveBusToPosition(_waitingBus, _busHumanTypes[_currentBusCount], busSpawnTransform, busWaitTransform);
 					_currentBusCount++;
 				}
@@ -81,7 +82,7 @@ namespace _Project.Scripts.Gameplay.Bus
 				if (_currentBusCount < _totalBusCount)
 				{
 					await UniTask.Delay(DelayBetweenBusSpawns);
-					_waitingBus = _poolManager.Get(GameConstants.BUS_POOL_KEY, transform).GetComponent<Bus>();
+					_waitingBus = GetBusFromPool();
 					await MoveBusToPosition(_waitingBus, _busHumanTypes[_currentBusCount], busSpawnTransform, busWaitTransform);
 					_currentBusCount++;
 				}
@@ -117,5 +118,21 @@ namespace _Project.Scripts.Gameplay.Bus
             return _mainBus != null;
         } 
 
+        
+        public void ReturnPoolObjects()
+        {
+	        if (_poolManager != null && _pooledBuses.Count > 0)
+	        {
+		        _poolManager.ReturnToPool(GameConstants.BUS_POOL_KEY, _pooledBuses);
+		        _pooledBuses.Clear();
+	        }
+        }
+        private Bus GetBusFromPool()
+		{
+			var bus = _poolManager.Get(GameConstants.BUS_POOL_KEY, transform).GetComponent<Bus>();
+			
+			_pooledBuses.Add(bus.gameObject);
+			return bus;
+		}
     }
 }

@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using _Project.Data.Constants;
 using _Project.Data.GameData;
+using _Project.Scripts.Core;
+using _Project.Scripts.Systems.Pooling;
 using UnityEngine;
 
 namespace _Project.Scripts.Gameplay.Grid
@@ -13,8 +16,12 @@ namespace _Project.Scripts.Gameplay.Grid
         private Action<Grid> _onGridClicked;
         private Grid[,] _gridMap;
         
+        private List<GameObject> _pooledStickmen = new();
+        private IPoolManager _poolManager;
+        
         public void CreateGridBoard(Vector2Int size, List<GridCellConfig> girdCellConfigList, float padding)
         {
+            Locator.Instance.TryResolve(out _poolManager);
             _gridMap ??= new Grid[size.x, size.y];
 
             var gridIndex = 0;
@@ -30,7 +37,7 @@ namespace _Project.Scripts.Gameplay.Grid
             
                     var gridCellConfig = girdCellConfigList[gridIndex];
                     var newGrid = Instantiate(gridPrefab, position, Quaternion.identity, transform);
-                    newGrid.Initialize(gridCellConfig, OnGridClicked);
+                    newGrid.Initialize(gridCellConfig, OnGridClicked, GetStickmanFromPool);
             
                     newGrid.name = $"GridCell ({x},{y}) | Type: {gridCellConfig.gridType} | Human: {gridCellConfig.humanType}";
                     _gridMap[x, y] = newGrid;
@@ -85,6 +92,23 @@ namespace _Project.Scripts.Gameplay.Grid
         {
             var relatedGrid = _gridMap[x, y];
             _onGridClicked?.Invoke(relatedGrid);
+        }
+
+
+        public void ReturnPoolObjects()
+        {
+            if (_poolManager != null && _pooledStickmen.Count > 0)
+            {
+                _poolManager.ReturnToPool(GameConstants.STICKMAN_POOL_KEY, _pooledStickmen);
+                _pooledStickmen.Clear();   
+            }
+        }
+        private GameObject GetStickmanFromPool(Transform parent)
+        {
+            var stickman = _poolManager.Get(GameConstants.STICKMAN_POOL_KEY, parent);
+            
+            _pooledStickmen.Add(stickman);
+            return stickman;
         }
     }
 }

@@ -294,6 +294,9 @@ namespace _Project.Scripts.Gameplay.LevelManagement
                 var newUserConfig = _userDataManager.LoseLevel();
                 gamePlayView.ShowLoseScreen(newUserConfig);
             }
+            
+            gridController.ReturnPoolObjects();
+            busController.ReturnPoolObjects();
         }
         
         private void SetupDebugging()
