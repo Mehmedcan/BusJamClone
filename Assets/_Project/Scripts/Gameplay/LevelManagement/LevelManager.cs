@@ -19,13 +19,16 @@ namespace _Project.Scripts.Gameplay.LevelManagement
 {
     public class LevelManager : MonoBehaviour
     {
-        [SerializeField] GridController gridController;
-        [SerializeField] HolderController holderController;
-        [SerializeField] BusController busController;
+        [SerializeField] private GridController gridController;
+        [SerializeField] private HolderController holderController;
+        [SerializeField] private BusController busController;
         
         [Space] [Header("UI Screen Variables")]
-        [SerializeField] TextMeshProUGUI debugText;
+        [SerializeField] private TextMeshProUGUI debugText;
         [SerializeField] private GamePlayView gamePlayView;
+        
+        [Space] [Header("Debug Mode (for me)")]
+        [SerializeField] private bool isDebugMode = false;
         
         // Level State Management
         private ReactiveProperty<LevelState> _levelState = new(LevelState.Idle);
@@ -132,6 +135,9 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             
             if (currentBus.IsFull())
             {
+                // Set state to WaitingForBus while bus is moving
+                _levelState.SetValueAndForceNotify(LevelState.WaitingForBus);
+                
                 _currentHumanType = await busController.GetNextBus();
                 
                 if (_currentHumanType == null)
@@ -143,6 +149,7 @@ namespace _Project.Scripts.Gameplay.LevelManagement
                 currentBus = busController.GetCurrentBus();
                 if (currentBus == null)
                 {
+                    _levelState.SetValueAndForceNotify(LevelState.WaitingForInput);
                     return;
                 }
             }
@@ -154,6 +161,9 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             // if bus is full after adding stickman, get next bus
             if (currentBus.IsFull())
             {
+                // Set state to WaitingForBus while bus is moving
+                _levelState.SetValueAndForceNotify(LevelState.WaitingForBus);
+                
                 _currentHumanType = await busController.GetNextBus();
                 
                 if (_currentHumanType == null)
@@ -164,7 +174,15 @@ namespace _Project.Scripts.Gameplay.LevelManagement
                 {
                     await CheckHoldersForMatchingBus();
                     CheckForFailCondition();
+                    
+                    // Return to WaitingForInput after all operations are complete
+                    _levelState.SetValueAndForceNotify(LevelState.WaitingForInput);
                 }
+            }
+            else
+            {
+                // Return to WaitingForInput if bus is not full
+                _levelState.SetValueAndForceNotify(LevelState.WaitingForInput);
             }
         }
         
@@ -247,6 +265,9 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             // Only get next bus if current bus is now full
             if (currentBus.IsFull())
             {
+                // Set state to WaitingForBus while bus is moving
+                _levelState.SetValueAndForceNotify(LevelState.WaitingForBus);
+                
                 _currentHumanType = await busController.GetNextBus();
                 
                 if (_currentHumanType == null)
@@ -259,6 +280,9 @@ namespace _Project.Scripts.Gameplay.LevelManagement
                     
                     // Check for fail condition after bus change
                     CheckForFailCondition();
+                    
+                    // Return to WaitingForInput after all operations are complete
+                    _levelState.SetValueAndForceNotify(LevelState.WaitingForInput);
                 }
             }
         }
@@ -301,13 +325,18 @@ namespace _Project.Scripts.Gameplay.LevelManagement
         
         private void SetupDebugging()
         {
-            _levelState.Subscribe(state =>
+            gamePlayView.SetDebugView(isDebugMode);
+            
+            if (isDebugMode)
             {
-                debugText.text = $"Level State: {state}\n" +
-                                 $"Current Bus Type: {_currentHumanType}\n" +
-                                 $"Empty Holders: {holderController.GetEmptyHolderCount()}\n" +
-                                 $"All Holders Full: {holderController.AreAllHoldersFull()}";
-            }).AddTo(this);
+                Observable.EveryUpdate().Subscribe(_ =>
+                {
+                    debugText.text = $"Level State: {_levelState.Value}\n" +
+                                     $"Current Bus Type: {_currentHumanType}\n" +
+                                     $"Empty Holders: {holderController.GetEmptyHolderCount()}\n" +
+                                     $"All Holders Full: {holderController.AreAllHoldersFull()}";
+                }).AddTo(this);
+            }
         }
 
     }

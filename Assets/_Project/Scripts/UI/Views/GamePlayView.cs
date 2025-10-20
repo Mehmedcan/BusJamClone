@@ -8,6 +8,7 @@ namespace _Project.Scripts.UI.Views
         [SerializeField] private GameObject inGameScreen;
         [SerializeField] private WinScreen winScreen;
         [SerializeField] private LoseScreen loseScreen;
+        [SerializeField] private GameObject debugView;
 
         private void Awake()
         {
@@ -32,6 +33,11 @@ namespace _Project.Scripts.UI.Views
             inGameScreen.SetActive(false);
             winScreen.gameObject.SetActive(false);
             loseScreen.gameObject.SetActive(true);
+        }
+
+        public void SetDebugView(bool isDebug)
+        {
+            debugView.SetActive(isDebug);
         }
     }
 }

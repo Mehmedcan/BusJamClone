@@ -278,6 +278,7 @@ MonoBehaviour:
   busController: {fileID: 1652366868}
   debugText: {fileID: 1940539754}
   gamePlayView: {fileID: 319737563}
+  isDebugMode: 0
 --- !u!1 &249034684
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,6 +581,7 @@ MonoBehaviour:
   inGameScreen: {fileID: 1787994756}
   winScreen: {fileID: 1220591328}
   loseScreen: {fileID: 1359389414}
+  debugView: {fileID: 832930015}
 --- !u!1 &358038162
 GameObject:
   m_ObjectHideFlags: 0
