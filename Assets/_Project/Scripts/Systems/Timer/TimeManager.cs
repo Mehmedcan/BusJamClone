@@ -45,7 +45,8 @@ namespace _Project.Scripts.Systems.Timer
                 .Select(elapsed => seconds - (int)elapsed)
                 .TakeWhile(remaining => remaining > 0)
                 .Do(remaining => onSecond?.Invoke(remaining))
-                .Finally(onCompleted)
+                .DoOnCompleted(() => onSecond?.Invoke(0))
+                .DoOnCompleted(() => onCompleted?.Invoke())  
                 .Subscribe();
 
             _disposables.Add(sub);

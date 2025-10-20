@@ -11,11 +11,12 @@ using UnityEngine;
 
 namespace _Project.Scripts.Systems.Life
 {
-    public class LifeManager : ILifeManager
+    public class UserDataManager : IUserDataManager
     {
-        public string LogTag => "[LifeManager]";
+        public string LogTag => "[UserDataManager]";
         public ReactiveProperty<int> RemainingTimeForNextLife { get; private set; }
-
+        public event EventHandler<UserConfig> OnUserLifeChanged;
+        
         private GameData _gameData;
         private IDisposable _timerDisposable;
         
@@ -49,6 +50,39 @@ namespace _Project.Scripts.Systems.Life
         #endregion
 
 
+        // --- Level Management ---
+        
+        public (UserConfig, int/*earned gold*/) WinLevel()
+        {
+            var userConfig = _saveManager.Load<UserConfig>(DataConstants.SAVE_KEY_USER_CONFIG);
+            var levelData =_gameData.levels[ userConfig.level];
+
+            var currentLevelGoldCount = levelData.goldCount;
+            var nextLevel = userConfig.level + 1 > _gameData.levels.Count - 1 ? userConfig.level : userConfig.level + 1;
+            
+            var newUserConfig = new UserConfig
+            {
+                level = nextLevel,
+                gold = userConfig.gold + currentLevelGoldCount,
+                lifeCount = userConfig.lifeCount,
+                lastFailTime = userConfig.lastFailTime
+            };
+            
+            _saveManager.Save(DataConstants.SAVE_KEY_USER_CONFIG, newUserConfig);
+            
+            return (newUserConfig, currentLevelGoldCount);
+        }
+        
+        public UserConfig LoseLevel()
+        {
+            ChangeUserLifeCount(-1);
+            SetupLifeDataIfNeeded();
+            
+            var userConfig = _saveManager.Load<UserConfig>(DataConstants.SAVE_KEY_USER_CONFIG);
+            return userConfig;
+        }
+        
+        // --- Life Management ---
         private void LoadGameData()
         {
             _gameData = Resources.Load<GameData>(DataConstants.GAME_CONFIG_PATH);
@@ -57,7 +91,7 @@ namespace _Project.Scripts.Systems.Life
         public void SetupLifeDataIfNeeded()
         {
             RemainingTimeForNextLife = new ReactiveProperty<int>();
-            
+
             var userConfig = _saveManager.Load<UserConfig>(DataConstants.SAVE_KEY_USER_CONFIG);
             if (userConfig.lifeCount >= DataConstants.USER_MAX_LIFE_COUNT)
             {
@@ -73,38 +107,46 @@ namespace _Project.Scripts.Systems.Life
             // max refilled
             if (refillCount >= (DataConstants.USER_MAX_LIFE_COUNT - userConfig.lifeCount))
             {
-                IncreaseUserLifeCount(DataConstants.USER_MAX_LIFE_COUNT);
+                ChangeUserLifeCount(DataConstants.USER_MAX_LIFE_COUNT);
                 return;
             }
             else if (refillCount > 0)
             {
-                IncreaseUserLifeCount(refillCount);
-                return;
+                ChangeUserLifeCount(refillCount);
             }
-            else
-            {
-                _timerDisposable?.Dispose();
-                _timerDisposable = _timeManager.StartTimer(seconds : (int)nextLifeRemainingSeconds, onSecond: OnLifeTimerTick, onCompleted: null);
-            }
+
+            _timerDisposable?.Dispose();
+            _timerDisposable = _timeManager.StartTimer(seconds: (int)nextLifeRemainingSeconds, onSecond: OnLifeTimerTick, onCompleted: OnTimerCompleted);
         }
 
         private void OnLifeTimerTick(int remainingSeconds)
         {
             RemainingTimeForNextLife.SetValueAndForceNotify(remainingSeconds);
         }
+
+        private void OnTimerCompleted()
+        {
+            ChangeUserLifeCount(changeAmount: 1);
+
+            SetupLifeDataIfNeeded();
+        }
         
-        private void IncreaseUserLifeCount(int increaseCount = 1)
+        private void ChangeUserLifeCount(int changeAmount)
         {
             var userConfig = _saveManager.Load<UserConfig>(DataConstants.SAVE_KEY_USER_CONFIG);
-          
-            userConfig.lifeCount += increaseCount;
-           
-            if (userConfig.lifeCount >= DataConstants.USER_MAX_LIFE_COUNT) // to set max life intialy
+
+            var isLifeIncreasing = changeAmount > 0;
+            var isDecreaseFromFull = changeAmount < 0 && userConfig.lifeCount == DataConstants.USER_MAX_LIFE_COUNT;
+            
+            if (isLifeIncreasing || isDecreaseFromFull)
             {
                 userConfig.lastFailTime = DateTime.UtcNow;
             }
-            
+
+            userConfig.lifeCount = Mathf.Min(userConfig.lifeCount + changeAmount, DataConstants.USER_MAX_LIFE_COUNT);
             _saveManager.Save(DataConstants.SAVE_KEY_USER_CONFIG, userConfig);
+            
+            OnUserLifeChanged?.Invoke(this, userConfig);
         }
     }
 }

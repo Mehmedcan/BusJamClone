@@ -186,6 +186,9 @@ namespace _Project.LevelEditor
                         DrawGridMatrix(level);
 
                         EditorGUILayout.Space(6);
+                        DrawGoldSection(level);
+                        
+                        EditorGUILayout.Space(6);
                         DrawHolderSection(level);
                         
                         EditorGUILayout.Space(6);
@@ -199,6 +202,13 @@ namespace _Project.LevelEditor
             EditorGUILayout.EndScrollView();
         }
 
+        private void DrawGoldSection(LevelConfig level)
+        {
+            EditorGUILayout.LabelField("Gold Amount", EditorStyles.boldLabel);
+            level.goldCount = Mathf.Max(0, EditorGUILayout.IntField("Gold Amount", level.goldCount));
+            EditorGUILayout.HelpBox("Defines how much gold you get when you complete this level.", MessageType.Info);
+        }
+        
         private void DrawHolderSection(LevelConfig level)
         {
             EditorGUILayout.LabelField("Holder Settings", EditorStyles.boldLabel);

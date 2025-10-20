@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Newtonsoft.Json;
 
 namespace _Project.Scripts.Systems.Save
 {
@@ -33,7 +34,7 @@ namespace _Project.Scripts.Systems.Save
                 return;
             }
 
-            var json = JsonUtility.ToJson(data);
+            var json = JsonConvert.SerializeObject(data);
             PlayerPrefs.SetString(key, json);
             PlayerPrefs.Save();
         }
@@ -54,7 +55,7 @@ namespace _Project.Scripts.Systems.Save
             var json = PlayerPrefs.GetString(key);
             try
             {
-                return JsonUtility.FromJson<T>(json);
+                return JsonConvert.DeserializeObject<T>(json);
             }
             catch (Exception e)
             {

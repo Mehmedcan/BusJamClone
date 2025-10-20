@@ -18,6 +18,7 @@ namespace _Project.Data.GameData
 
         [Min(1)] public int holderCount = 5;
         [Min(1)] public int busCount = 1;
+        [Min(1)] public int goldCount = 10;
         public List<HumanType> busHumanTypes = new();
     }
 }

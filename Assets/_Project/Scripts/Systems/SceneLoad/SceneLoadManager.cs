@@ -39,7 +39,8 @@ namespace _Project.Scripts.Systems.SceneLoad
             var target = SceneManager.GetSceneByName(sceneName);
             if (target.isLoaded)
             {
-                Debug.LogWarning($"{LogTag} Scene '{sceneName}' is already loaded.");
+                Debug.LogWarning($"{LogTag} Same scene loading requested: {sceneName}");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 return;
             }
 

@@ -56,8 +56,8 @@ namespace _Project.Scripts.Core
         private async UniTask InitLifeManager()
         {
             var locator = Locator.Instance;
-            var lifeManager = new LifeManager();
-            locator.Register<ILifeManager>(lifeManager);
+            var lifeManager = new UserDataManager();
+            locator.Register<IUserDataManager>(lifeManager);
             
             lifeManager.Initialize();
             await lifeManager.AsyncInitialize();

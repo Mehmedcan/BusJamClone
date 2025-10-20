@@ -16,15 +16,16 @@ namespace _Project.Scripts.UI.MenuScene
 
         private UserConfig _userConfig;
         
-        private ISaveManager _saveManager; 
+        private ISaveManager _saveManager;
         
         private const string GameScene = "GameScene";
         
         private void Awake()
         {
             Locator.Instance.TryResolve(out _saveManager);
+            
             _userConfig = _saveManager.Load<UserConfig>(DataConstants.SAVE_KEY_USER_CONFIG);
-
+            
             SetUI();
             SetPlayButton();
         }
@@ -43,6 +44,13 @@ namespace _Project.Scripts.UI.MenuScene
 
         private async void OnPlayButtonClicked()
         {
+            var userConfig = _saveManager.Load<UserConfig>(DataConstants.SAVE_KEY_USER_CONFIG);
+            if (userConfig.lifeCount <= 0)
+            {
+                playButton.enabled = false;
+                return;
+            }
+
             playButton.interactable = false;
             
             Locator.Instance.TryResolve<ISceneLoadManager>(out var sceneLoaderManager);

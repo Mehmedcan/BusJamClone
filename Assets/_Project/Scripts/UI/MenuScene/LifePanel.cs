@@ -14,27 +14,46 @@ namespace _Project.Scripts.UI.MenuScene
         [SerializeField] private TextMeshProUGUI lifeText;
         [SerializeField] private TextMeshProUGUI descriptionText;
 
-        private ILifeManager _lifeManager;
+        private IUserDataManager _userDataManager;
         
         public void Initialize(UserConfig userConfig)
         {
-            Locator.Instance.TryResolve(out _lifeManager);
+            Locator.Instance.TryResolve(out _userDataManager);
 
             lifeText.text = userConfig.lifeCount.ToString();
-            
             if (userConfig.lifeCount >= DataConstants.USER_MAX_LIFE_COUNT)
             {
                 descriptionText.text = "FULL";
             }
             else
             {
-                _lifeManager.RemainingTimeForNextLife.Subscribe(UpdateLifeTextAsATimer).AddTo(this);
+                _userDataManager.RemainingTimeForNextLife.Subscribe(UpdateLifeTextAsATimer).AddTo(this);
             }
+            
+            _userDataManager.OnUserLifeChanged += OnUserLifeChanged;
         }
 
         private void UpdateLifeTextAsATimer(int remainingTimeForNextLife)
         {
             descriptionText.text = remainingTimeForNextLife.ToMinuteSecond();
+        }
+
+        private void OnUserLifeChanged(object sender, UserConfig e)
+        {
+            lifeText.text = e.lifeCount.ToString();
+            
+            if (e.lifeCount >= DataConstants.USER_MAX_LIFE_COUNT)
+            {
+                descriptionText.text = "FULL";
+            }
+        }
+      
+        private void OnDestroy()
+        {
+            if (_userDataManager != null)
+            {
+                
+            }
         }
     }
 }

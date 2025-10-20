@@ -70,15 +70,10 @@ namespace _Project.Scripts.Gameplay.LevelManagement
                 return;
             }
             
-            if (grid.Type != GridType.Occupied) // do nothing if the grid is not occupied
+            // do nothing if the grid is not occupied
+            if (grid.Type != GridType.Occupied)
             {
-                return;
-            }
-
-            var canStickmanExit = gridController.CanStickmanExit(grid);
-            if (!canStickmanExit)
-            {
-                Debug.LogError("Stickman cannot exit from this grid!");
+                Debug.Log("Grid is not occupied, ignoring click");
                 return;
             }
             
@@ -94,11 +89,13 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             // move to bus if types match
             if (gridHumanType == _currentHumanType)
             {
+                Debug.Log($"Moving stickman to bus - Type: {gridHumanType}");
                 await MoveStickmanToBus(stickman, grid);
             }
             // move to holder
             else
             {
+                Debug.Log($"Moving stickman to holder - Grid Type: {gridHumanType}, Bus Type: {_currentHumanType}");
                 await MoveStickmanToHolder(stickman, grid);
             }
         }
@@ -113,6 +110,7 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             
             var currentBus = busController.GetCurrentBus();
             
+            // Check if bus is full
             if (currentBus.IsFull())
             {
                 Debug.Log("Current bus is full, getting next bus");
@@ -120,10 +118,12 @@ namespace _Project.Scripts.Gameplay.LevelManagement
                 
                 if (_currentHumanType == null)
                 {
+                    Debug.Log("Level completed!");
                     _levelState.SetValueAndForceNotify(LevelState.LevelCompleted);
                     return;
                 }
                 
+                // Get the new bus
                 currentBus = busController.GetCurrentBus();
                 if (currentBus == null)
                 {
@@ -132,9 +132,9 @@ namespace _Project.Scripts.Gameplay.LevelManagement
                 }
             }
             
-            await stickman.MoveStickmanToPosition(currentBus.transform);
+            await stickman.MoveStickmanToPosition(currentBus.transform, 1f);
             currentBus.EnableNextStickman();
-            grid.ClearGrid();
+            ClearGrid(grid);
             
             // Only get next bus if current bus is now full
             if (currentBus.IsFull())
@@ -143,12 +143,13 @@ namespace _Project.Scripts.Gameplay.LevelManagement
                 
                 if (_currentHumanType == null)
                 {
+                    Debug.Log("Level completed!");
                     _levelState.SetValueAndForceNotify(LevelState.LevelCompleted);
                 }
                 else
                 {
+                    // check holders for matching bus
                     await CheckHoldersForMatchingBus();
-                    CheckForFailCondition();
                 }
             }
         }
@@ -161,15 +162,14 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             if (holder == null)
             {
                 Debug.LogError("No empty holder available!");
-                CheckForFailCondition();
                 return;
             }
             
-            await stickman.MoveStickmanToPosition(holder.transform);
-            grid.ClearGrid(shouldDeactiveStickman: false);
+            // move stickman to holder
+            await stickman.MoveStickmanToPosition(holder.transform, 1f);
             
-            // check for fail condition after moving to holder
-            CheckForFailCondition();
+            // Clear grid but don't deactivate stickman (it's now in holder)
+            ClearGridWithoutDeactivatingStickman(grid);
         }
         
         private async UniTask CheckHoldersForMatchingBus()
@@ -187,15 +187,17 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             var currentBus = busController.GetCurrentBus();
             var matchingHolders = holderController.GetHoldersWithHumanType(_currentHumanType.Value);
             
-            var stickmanCountToMove = Mathf.Min(matchingHolders.Count, DataConstants.BUS_MAX_STICMAN_COUNT - currentBus.GetCurrentStickmanCount());
+            // Only move stickman up to bus capacity
+            var stickmenToMove = Mathf.Min(matchingHolders.Count, DataConstants.BUS_MAX_STICMAN_COUNT - currentBus.GetCurrentStickmanCount());
             
             var moveTasks = new List<UniTask>();
-            for (var i = 0; i < stickmanCountToMove; i++)
+            for (var i = 0; i < stickmenToMove; i++)
             {
                 var holder = matchingHolders[i];
                 var stickman = holder.GetStickmanInstance();
                 if (stickman != null)
                 {
+                    Debug.Log($"Moving stickman from holder to bus - Type: {_currentHumanType}");
                     var moveTask = MoveStickmanFromHolderToBus(stickman, holder);
                     moveTasks.Add(moveTask);
                 }
@@ -222,7 +224,7 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             }
             
             // move stickman to bus
-            await stickman.MoveStickmanToPosition(currentBus.transform);
+            await stickman.MoveStickmanToPosition(currentBus.transform, 1f);
             
             // Enable the bus's own sitting stickman and deactivate the holder's stickman
             currentBus.EnableNextStickman();
@@ -243,26 +245,25 @@ namespace _Project.Scripts.Gameplay.LevelManagement
                 else
                 {
                     await CheckHoldersForMatchingBus();
-                    // Check for fail condition after bus change
-                    CheckForFailCondition();
                 }
             }
         }
         
-        private void CheckForFailCondition()
+        private void ClearGrid(Grid.Grid grid)
         {
-            // all holders are full AND the current bus type has no matching holders
-           
-            if (holderController.AreAllHoldersFull() && _currentHumanType.HasValue)
+            grid.SetType(GridType.Empty);
+            
+            var stickman = grid.GetStickmanInstance();
+            if (stickman != null)
             {
-                bool hasMatchingHolder = holderController.HasHolderWithHumanType(_currentHumanType.Value);
-                
-                if (!hasMatchingHolder)
-                {
-                    Debug.LogError("Level Failed! All holders are full and no matching stickman for current bus type.");
-                    _levelState.SetValueAndForceNotify(LevelState.LevelFailed);
-                }
+                stickman.gameObject.SetActive(false);
             }
+        }
+        
+        private void ClearGridWithoutDeactivatingStickman(Grid.Grid grid)
+        {
+            grid.SetType(GridType.Empty);
+            // Don't deactivate stickman as it's moving to holder
         }
         
         private void SetupDebugging()
@@ -270,9 +271,7 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             _levelState.Subscribe(state =>
             {
                 debugText.text = $"Level State: {state}\n" +
-                                 $"Current Bus Type: {_currentHumanType}\n" +
-                                 $"Empty Holders: {holderController.GetEmptyHolderCount()}\n" +
-                                 $"All Holders Full: {holderController.AreAllHoldersFull()}";
+                                 $"Current Bus Type: {_currentHumanType}\n";
             }).AddTo(this);
         }
 

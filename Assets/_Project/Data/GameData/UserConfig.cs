@@ -9,12 +9,12 @@ namespace _Project.Data.GameData
         public int lifeCount;
         public DateTime lastFailTime;
 
-        public UserConfig( int gold, int level, int lifeCount)
+        public UserConfig( int gold, int level, int lifeCount, DateTime lastFailTime)
         {
             this.gold = gold;
             this.level = level;
             this.lifeCount = lifeCount;
-            lastFailTime = DateTime.MinValue;
+            this.lastFailTime = lastFailTime;
         }
     }
 }

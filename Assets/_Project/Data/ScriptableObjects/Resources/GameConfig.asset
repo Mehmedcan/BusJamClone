@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af338a75915874887897729a14675ed0, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: 
-  refillSeconds: 300
+  refillSeconds: 30
   levels:
   - levelName: Level 1
     enabled: 1
-    width: 11
+    width: 12
     height: 10
     cells:
     - x: 0
@@ -145,33 +145,33 @@ MonoBehaviour:
       humanType: 0
     - x: 3
       y: 1
-      gridType: 2
-      humanType: 1
-    - x: 3
-      y: 2
-      gridType: 2
-      humanType: 2
-    - x: 3
-      y: 3
-      gridType: 2
-      humanType: 2
-    - x: 3
-      y: 4
-      gridType: 2
-      humanType: 0
-    - x: 3
-      y: 5
-      gridType: 0
-      humanType: 0
-    - x: 3
-      y: 6
-      gridType: 0
-      humanType: 0
-    - x: 3
-      y: 7
       gridType: 0
       humanType: 1
     - x: 3
+      y: 2
+      gridType: 0
+      humanType: 2
+    - x: 3
+      y: 3
+      gridType: 0
+      humanType: 2
+    - x: 3
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 7
+      gridType: 0
+      humanType: 1
+    - x: 3
       y: 8
       gridType: 0
       humanType: 1
@@ -181,7 +181,7 @@ MonoBehaviour:
       humanType: 0
     - x: 4
       y: 0
-      gridType: 1
+      gridType: 2
       humanType: 0
     - x: 4
       y: 1
@@ -189,15 +189,15 @@ MonoBehaviour:
       humanType: 2
     - x: 4
       y: 2
-      gridType: 2
+      gridType: 0
       humanType: 0
     - x: 4
       y: 3
-      gridType: 2
+      gridType: 0
       humanType: 2
     - x: 4
       y: 4
-      gridType: 2
+      gridType: 0
       humanType: 0
     - x: 4
       y: 5
@@ -221,23 +221,23 @@ MonoBehaviour:
       humanType: 0
     - x: 5
       y: 0
-      gridType: 1
+      gridType: 2
       humanType: 0
     - x: 5
       y: 1
-      gridType: 1
-      humanType: 1
+      gridType: 2
+      humanType: 2
     - x: 5
       y: 2
-      gridType: 2
+      gridType: 0
       humanType: 0
     - x: 5
       y: 3
-      gridType: 2
+      gridType: 0
       humanType: 1
     - x: 5
       y: 4
-      gridType: 2
+      gridType: 0
       humanType: 2
     - x: 5
       y: 5
@@ -261,7 +261,7 @@ MonoBehaviour:
       humanType: 0
     - x: 6
       y: 0
-      gridType: 0
+      gridType: 2
       humanType: 0
     - x: 6
       y: 1
@@ -269,15 +269,15 @@ MonoBehaviour:
       humanType: 2
     - x: 6
       y: 2
-      gridType: 2
+      gridType: 0
       humanType: 0
     - x: 6
       y: 3
-      gridType: 2
+      gridType: 0
       humanType: 2
     - x: 6
       y: 4
-      gridType: 2
+      gridType: 0
       humanType: 0
     - x: 6
       y: 5
@@ -301,13 +301,502 @@ MonoBehaviour:
       humanType: 0
     - x: 7
       y: 0
-      gridType: 0
-      humanType: 0
-    - x: 7
-      y: 1
       gridType: 2
       humanType: 1
     - x: 7
+      y: 1
+      gridType: 2
+      humanType: 1
+    - x: 7
+      y: 2
+      gridType: 2
+      humanType: 1
+    - x: 7
+      y: 3
+      gridType: 2
+      humanType: 1
+    - x: 7
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 9
+      gridType: 0
+      humanType: 0
+    holderCount: 5
+    busCount: 2
+    goldCount: 10
+    busHumanTypes: 0000000002000000
+  - levelName: Level 2
+    enabled: 1
+    width: 12
+    height: 10
+    cells:
+    - x: 0
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 0
+      gridType: 2
+      humanType: 0
+    - x: 5
+      y: 1
+      gridType: 2
+      humanType: 0
+    - x: 5
+      y: 2
+      gridType: 2
+      humanType: 0
+    - x: 5
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 0
+      gridType: 2
+      humanType: 1
+    - x: 6
+      y: 1
+      gridType: 2
+      humanType: 1
+    - x: 6
+      y: 2
+      gridType: 2
+      humanType: 1
+    - x: 6
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 7
       y: 2
       gridType: 0
       humanType: 0
@@ -456,9 +945,1517 @@ MonoBehaviour:
       gridType: 0
       humanType: 0
     - x: 10
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 9
+      gridType: 0
+      humanType: 0
+    holderCount: 5
+    busCount: 2
+    goldCount: 10
+    busHumanTypes: 0100000000000000
+  - levelName: Level 3
+    enabled: 1
+    width: 12
+    height: 10
+    cells:
+    - x: 0
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 0
+      gridType: 0
+      humanType: 1
+    - x: 4
+      y: 1
+      gridType: 0
+      humanType: 2
+    - x: 4
+      y: 2
+      gridType: 0
+      humanType: 1
+    - x: 4
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 0
+      gridType: 2
+      humanType: 1
+    - x: 5
+      y: 1
+      gridType: 2
+      humanType: 2
+    - x: 5
+      y: 2
+      gridType: 2
+      humanType: 1
+    - x: 5
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 0
+      gridType: 2
+      humanType: 2
+    - x: 6
+      y: 1
+      gridType: 2
+      humanType: 1
+    - x: 6
+      y: 2
+      gridType: 2
+      humanType: 2
+    - x: 6
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 9
+      gridType: 0
+      humanType: 0
+    holderCount: 5
+    busCount: 2
+    goldCount: 10
+    busHumanTypes: 0200000001000000
+  - levelName: Level 4
+    enabled: 1
+    width: 12
+    height: 10
+    cells:
+    - x: 0
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 0
+      gridType: 0
+      humanType: 1
+    - x: 3
+      y: 1
+      gridType: 0
+      humanType: 1
+    - x: 3
+      y: 2
+      gridType: 0
+      humanType: 1
+    - x: 3
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 0
+      gridType: 2
+      humanType: 1
+    - x: 4
+      y: 1
+      gridType: 2
+      humanType: 1
+    - x: 4
+      y: 2
+      gridType: 2
+      humanType: 1
+    - x: 4
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 0
+      gridType: 2
+      humanType: 2
+    - x: 5
+      y: 1
+      gridType: 2
+      humanType: 0
+    - x: 5
+      y: 2
+      gridType: 2
+      humanType: 0
+    - x: 5
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 0
+      gridType: 2
+      humanType: 2
+    - x: 6
+      y: 1
+      gridType: 2
+      humanType: 2
+    - x: 6
+      y: 2
+      gridType: 2
+      humanType: 0
+    - x: 6
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 11
       y: 9
       gridType: 0
       humanType: 0
     holderCount: 5
     busCount: 3
-    busHumanTypes: 000000000100000002000000
+    goldCount: 10
+    busHumanTypes: 010000000200000000000000
+  - levelName: Level 5
+    enabled: 1
+    width: 12
+    height: 10
+    cells:
+    - x: 0
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 0
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 1
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 2
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 2
+      gridType: 0
+      humanType: 2
+    - x: 3
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 3
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 0
+      gridType: 2
+      humanType: 1
+    - x: 4
+      y: 1
+      gridType: 2
+      humanType: 0
+    - x: 4
+      y: 2
+      gridType: 2
+      humanType: 2
+    - x: 4
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 4
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 0
+      gridType: 2
+      humanType: 2
+    - x: 5
+      y: 1
+      gridType: 2
+      humanType: 1
+    - x: 5
+      y: 2
+      gridType: 2
+      humanType: 0
+    - x: 5
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 5
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 0
+      gridType: 2
+      humanType: 0
+    - x: 6
+      y: 1
+      gridType: 2
+      humanType: 1
+    - x: 6
+      y: 2
+      gridType: 2
+      humanType: 2
+    - x: 6
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 6
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 7
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 8
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 9
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 10
+      y: 9
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 0
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 1
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 2
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 3
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 4
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 5
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 6
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 7
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 8
+      gridType: 0
+      humanType: 0
+    - x: 11
+      y: 9
+      gridType: 0
+      humanType: 0
+    holderCount: 5
+    busCount: 3
+    goldCount: 10
+    busHumanTypes: 010000000000000002000000
