@@ -149,8 +149,8 @@ MonoBehaviour:
       humanType: 1
     - x: 3
       y: 2
-      gridType: 0
-      humanType: 0
+      gridType: 2
+      humanType: 2
     - x: 3
       y: 3
       gridType: 0
@@ -225,16 +225,16 @@ MonoBehaviour:
       humanType: 0
     - x: 5
       y: 1
-      gridType: 2
-      humanType: 0
+      gridType: 1
+      humanType: 1
     - x: 5
       y: 2
       gridType: 2
       humanType: 0
     - x: 5
       y: 3
-      gridType: 0
-      humanType: 0
+      gridType: 2
+      humanType: 1
     - x: 5
       y: 4
       gridType: 0
@@ -261,7 +261,7 @@ MonoBehaviour:
       humanType: 0
     - x: 6
       y: 0
-      gridType: 1
+      gridType: 0
       humanType: 0
     - x: 6
       y: 1
@@ -460,5 +460,5 @@ MonoBehaviour:
       gridType: 0
       humanType: 0
     holderCount: 5
-    busCount: 5
-    busHumanTypes: 0000000002000000010000000000000002000000
+    busCount: 3
+    busHumanTypes: 000000000100000002000000

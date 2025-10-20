@@ -22,9 +22,10 @@ namespace _Project.Scripts.Gameplay.Stickman
             bodySkinnedMeshRenderer.materials = meshMaterials;
         }
 
-        public UniTask MoveStickmanToPosition( Transform targetTransform, float duration)
+        public UniTask MoveStickmanToPosition(Transform targetTransform, float duration)
         {
-            return transform.DOMove(targetTransform.position, duration).ToUniTask();
+            var movePosition = new Vector3( targetTransform.position.x, transform.position.y, targetTransform.position.z);
+            return transform.DOMove(movePosition, duration).ToUniTask();
         }
     }
 }

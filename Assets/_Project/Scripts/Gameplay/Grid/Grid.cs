@@ -83,9 +83,14 @@ namespace _Project.Scripts.Gameplay.Grid
             _stickmanInstance.Initialize(_humanType, typeMaterial);
         }
         
-        private Stickman.Stickman GetStickmanInstance()
+        public Stickman.Stickman GetStickmanInstance()
         {
             return _stickmanInstance;
+        }
+        
+        public HumanType GetHumanType()
+        {
+            return _humanType;
         }
         
         

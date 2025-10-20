@@ -106,15 +106,25 @@ namespace _Project.Scripts.Gameplay.Bus
 			Debug.Log("FINISHED");
 			return null; // No more buses
         }
-
+        
         private UniTask MoveBusToPosition(Bus bus, HumanType humanType, Transform currentTransform, Transform targetTransform)
         {
-            bus.transform.position = currentTransform.position;
-            bus.gameObject.SetActive(true);
+	        bus.transform.position = currentTransform.position;
+	        bus.gameObject.SetActive(true);
             
-            bus.Initialize(humanType);
+	        bus.Initialize(humanType);
             
-            return bus.transform.DOMove(targetTransform.position, 1f).SetEase(Ease.InOutSine).ToUniTask();
+	        return bus.transform.DOMove(targetTransform.position, 1f).SetEase(Ease.InOutSine).ToUniTask();
+        } 
+
+        public Bus GetCurrentBus()
+        {
+            return _mainBus;
+        }
+        
+        public bool HasCurrentBus()
+        {
+            return _mainBus != null;
         } 
 
     }

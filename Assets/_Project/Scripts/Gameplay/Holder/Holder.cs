@@ -11,6 +11,7 @@ namespace _Project.Scripts.Gameplay.Holder
         private HumanType _humanType;
         private int _order;
         private Action<int> _onClick;
+        private Stickman.Stickman _stickmanInstance;
         
         public void Initialize(int order, Action<int> onClick)
         {
@@ -24,10 +25,28 @@ namespace _Project.Scripts.Gameplay.Holder
             _humanType = humanType;
         }
         
+        public void OccupyWithStickman(HumanType humanType, Stickman.Stickman stickman)
+        {
+            IsOccupied = true;
+            _humanType = humanType;
+            _stickmanInstance = stickman;
+        }
+        
         public void Vacate()
         {
             IsOccupied = false;
             _humanType = default;
+            _stickmanInstance = null;
+        }
+        
+        public HumanType GetHumanType()
+        {
+            return _humanType;
+        }
+        
+        public Stickman.Stickman GetStickmanInstance()
+        {
+            return _stickmanInstance;
         }
         
         public override string ToString()

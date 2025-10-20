@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using _Project.Data.Constants;
 using _Project.Data.ScriptableObjects.Data;
 using _Project.Scripts.Gameplay.Human;
 using UnityEngine;
@@ -16,8 +17,6 @@ namespace _Project.Scripts.Gameplay.Bus
 
         private int _stickmanCount;
         private HumanType _busType;
-        
-        private const int MaxStickmanCount = 3;
 
         public void Initialize(HumanType busType)
         {
@@ -61,13 +60,28 @@ namespace _Project.Scripts.Gameplay.Bus
             }
         }
         
-        private void EnableNextStickman()
+        public void EnableNextStickman()
         {
-            if (_stickmanCount < MaxStickmanCount)
+            if (_stickmanCount < DataConstants.BUS_MAX_STICMAN_COUNT)
             {
                 sittingStickmans[_stickmanCount].gameObject.SetActive(true);
                 _stickmanCount++;
             }
+        }
+        
+        public bool IsFull()
+        {
+            return _stickmanCount >= DataConstants.BUS_MAX_STICMAN_COUNT;
+        }
+        
+        public int GetCurrentStickmanCount()
+        {
+            return _stickmanCount;
+        }
+        
+        public HumanType GetBusType()
+        {
+            return _busType;
         }
     }
 }

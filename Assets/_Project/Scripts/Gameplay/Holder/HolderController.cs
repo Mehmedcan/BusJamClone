@@ -55,6 +55,54 @@ namespace _Project.Scripts.Gameplay.Holder
             return true;
         }
         
+        public bool FillNextEmptyHolderWithStickman(HumanType humanType, Stickman.Stickman stickman)
+        {
+            if (_currentEmptyIndex >= _holders.Count)
+            {
+                Debug.Log("All holders are full!");
+                return false;
+            }
+            
+            var holder = _holders[_currentEmptyIndex];
+            holder.OccupyWithStickman(humanType, stickman);
+            
+            Debug.Log($"Filled holder {_currentEmptyIndex} with {humanType} and stickman");
+            
+            _currentEmptyIndex++;
+            return true;
+        }
+        
+        public Holder GetNextEmptyHolder()
+        {
+            if (_currentEmptyIndex >= _holders.Count)
+            {
+                return null;
+            }
+            
+            return _holders[_currentEmptyIndex];
+        }
+        
+        public Transform GetNextEmptyHolderTransform()
+        {
+            var holder = GetNextEmptyHolder();
+            return holder?.transform;
+        }
+        
+        public List<Holder> GetHoldersWithHumanType(HumanType humanType)
+        {
+            var matchingHolders = new List<Holder>();
+            
+            foreach (var holder in _holders)
+            {
+                if (holder.IsOccupied && holder.GetHumanType() == humanType)
+                {
+                    matchingHolders.Add(holder);
+                }
+            }
+            
+            return matchingHolders;
+        }
+        
         public bool AreAllHoldersFull()
         {
             return _currentEmptyIndex >= _holders.Count;

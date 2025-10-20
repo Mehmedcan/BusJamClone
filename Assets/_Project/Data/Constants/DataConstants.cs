@@ -4,6 +4,7 @@ namespace _Project.Data.Constants
     public static class DataConstants
     {
         public const int USER_MAX_LIFE_COUNT = 5;
+        public const int BUS_MAX_STICMAN_COUNT = 3;
         
         public const string GAME_CONFIG_PATH = "GameConfig";
         public const string SAVE_KEY_USER_CONFIG = "USER_CONFIG";

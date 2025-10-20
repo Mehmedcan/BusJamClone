@@ -31,7 +31,14 @@ namespace _Project.LevelEditor
 
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
             {
-                _gameData = (GameData)EditorGUILayout.ObjectField("GameConfig Asset", _gameData, typeof(GameData), false);
+                if(Resources.Load<GameData>("GameConfig") != null && _gameData == null)
+                {
+                    _gameData = Resources.Load<GameData>("GameConfig");
+                }
+                else
+                {
+                    _gameData = (GameData)EditorGUILayout.ObjectField("GameConfig Asset", _gameData, typeof(GameData), false);
+                }
 
                 if (_gameData == null)
                 {
