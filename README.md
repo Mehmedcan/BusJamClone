@@ -1,6 +1,6 @@
 # Bus Jam Clone
 
-A lightweight, mobile-oriented Unity project developed for a technical evaluation case.  
+A lightweight, mobile-oriented Unity project.
 This repository demonstrates structured project setup, clean code organization, and custom editor tooling.
 
 ---
