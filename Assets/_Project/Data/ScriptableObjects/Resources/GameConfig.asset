@@ -153,11 +153,11 @@ MonoBehaviour:
       humanType: 2
     - x: 3
       y: 3
-      gridType: 0
-      humanType: 0
+      gridType: 2
+      humanType: 2
     - x: 3
       y: 4
-      gridType: 0
+      gridType: 2
       humanType: 0
     - x: 3
       y: 5
@@ -193,11 +193,11 @@ MonoBehaviour:
       humanType: 0
     - x: 4
       y: 3
-      gridType: 0
-      humanType: 0
+      gridType: 2
+      humanType: 2
     - x: 4
       y: 4
-      gridType: 0
+      gridType: 2
       humanType: 0
     - x: 4
       y: 5
@@ -237,8 +237,8 @@ MonoBehaviour:
       humanType: 1
     - x: 5
       y: 4
-      gridType: 0
-      humanType: 0
+      gridType: 2
+      humanType: 2
     - x: 5
       y: 5
       gridType: 0
@@ -273,11 +273,11 @@ MonoBehaviour:
       humanType: 0
     - x: 6
       y: 3
-      gridType: 0
-      humanType: 0
+      gridType: 2
+      humanType: 2
     - x: 6
       y: 4
-      gridType: 0
+      gridType: 2
       humanType: 0
     - x: 6
       y: 5

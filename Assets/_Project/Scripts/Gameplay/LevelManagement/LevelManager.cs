@@ -8,6 +8,7 @@ using _Project.Scripts.Gameplay.Holder;
 using _Project.Scripts.Gameplay.Human;
 using _Project.Scripts.Systems.Save;
 using Cysharp.Threading.Tasks;
+using TMPro;
 using UniRx;
 using UnityEngine;
 
@@ -18,6 +19,9 @@ namespace _Project.Scripts.Gameplay.LevelManagement
         [SerializeField] GridController gridController;
         [SerializeField] HolderController holderController;
         [SerializeField] BusController busController;
+        
+        [Space] [Header("Debug Screen")]
+        [SerializeField] TextMeshProUGUI debugText;
         
         // Level State Management
         private ReactiveProperty<LevelState> _levelState = new(LevelState.Idle);
@@ -33,6 +37,7 @@ namespace _Project.Scripts.Gameplay.LevelManagement
         
         public void SetAndStartLevel()
         {
+            SetupDebugging();
             SetupData();
             
             gridController.SetGridClick(OnGridClick);
@@ -150,19 +155,17 @@ namespace _Project.Scripts.Gameplay.LevelManagement
         
         private async UniTask MoveStickmanToHolder(Stickman.Stickman stickman, Grid.Grid grid)
         {
-            var holderTransform = holderController.GetNextEmptyHolderTransform();
+            var gridHumanType = grid.GetHumanType();
+            var holder = holderController.GetAndFillNextEmptyHolder(gridHumanType, stickman);
             
-            if (holderTransform == null)
+            if (holder == null)
             {
                 Debug.LogError("No empty holder available!");
                 return;
             }
             
             // move stickman to holder
-            await stickman.MoveStickmanToPosition(holderTransform, 1f);
-            
-            var gridHumanType = grid.GetHumanType();
-            holderController.FillNextEmptyHolderWithStickman(gridHumanType, stickman);
+            await stickman.MoveStickmanToPosition(holder.transform, 1f);
             
             // Clear grid but don't deactivate stickman (it's now in holder)
             ClearGridWithoutDeactivatingStickman(grid);
@@ -254,5 +257,15 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             grid.SetType(GridType.Empty);
             // Don't deactivate stickman as it's moving to holder
         }
+        
+        private void SetupDebugging()
+        {
+            _levelState.Subscribe(state =>
+            {
+                debugText.text = $"Level State: {state}\n" +
+                                 $"Current Bus Type: {_currentHumanType}\n";
+            }).AddTo(this);
+        }
+
     }
 }

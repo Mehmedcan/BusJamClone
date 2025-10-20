@@ -14,13 +14,11 @@ namespace _Project.Scripts.Gameplay.Holder
         public float padding;
         
         private List<Holder> _holders = new();
-        private int _currentEmptyIndex = 0;
   
         
         public void CreateHolders(int holderCount)
         {
             _holders ??= new List<Holder>(holderCount);
-            _currentEmptyIndex = 0;
 
             for (var i = 0; i < holderCount; i++)
             {
@@ -38,54 +36,23 @@ namespace _Project.Scripts.Gameplay.Holder
             }
         }
         
-        public bool FillNextEmptyHolder(HumanType humanType)
+        public Holder GetAndFillNextEmptyHolder(HumanType humanType, Stickman.Stickman stickman)
         {
-            if (_currentEmptyIndex >= _holders.Count)
+            // Find the first empty holder
+            for (int i = 0; i < _holders.Count; i++)
             {
-                Debug.Log("All holders are full!");
-                return false;
+                if (!_holders[i].IsOccupied)
+                {
+                    var holder = _holders[i];
+                    holder.OccupyWithStickman(humanType, stickman);
+                    
+                    Debug.Log($"Filled holder {i} with {humanType} and stickman");
+                    return holder;
+                }
             }
             
-            var holder = _holders[_currentEmptyIndex];
-            holder.Occupy(humanType);
-            
-            Debug.Log($"Filled holder {_currentEmptyIndex} with {humanType}");
-            
-            _currentEmptyIndex++;
-            return true;
-        }
-        
-        public bool FillNextEmptyHolderWithStickman(HumanType humanType, Stickman.Stickman stickman)
-        {
-            if (_currentEmptyIndex >= _holders.Count)
-            {
-                Debug.Log("All holders are full!");
-                return false;
-            }
-            
-            var holder = _holders[_currentEmptyIndex];
-            holder.OccupyWithStickman(humanType, stickman);
-            
-            Debug.Log($"Filled holder {_currentEmptyIndex} with {humanType} and stickman");
-            
-            _currentEmptyIndex++;
-            return true;
-        }
-        
-        public Holder GetNextEmptyHolder()
-        {
-            if (_currentEmptyIndex >= _holders.Count)
-            {
-                return null;
-            }
-            
-            return _holders[_currentEmptyIndex];
-        }
-        
-        public Transform GetNextEmptyHolderTransform()
-        {
-            var holder = GetNextEmptyHolder();
-            return holder?.transform;
+            Debug.Log("All holders are full!");
+            return null;
         }
         
         public List<Holder> GetHoldersWithHumanType(HumanType humanType)
@@ -101,16 +68,6 @@ namespace _Project.Scripts.Gameplay.Holder
             }
             
             return matchingHolders;
-        }
-        
-        public bool AreAllHoldersFull()
-        {
-            return _currentEmptyIndex >= _holders.Count;
-        }
-        
-        public int GetEmptyHolderCount()
-        {
-            return Mathf.Max(0, _holders.Count - _currentEmptyIndex);
         }
         
         private void OnHolderClicked(int index)

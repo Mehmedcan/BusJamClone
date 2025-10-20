@@ -18,13 +18,7 @@ namespace _Project.Scripts.Gameplay.Holder
             _order = order;
             _onClick = onClick;
         }
-        
-        public void Occupy(HumanType humanType)
-        {
-            IsOccupied = true;
-            _humanType = humanType;
-        }
-        
+
         public void OccupyWithStickman(HumanType humanType, Stickman.Stickman stickman)
         {
             IsOccupied = true;
