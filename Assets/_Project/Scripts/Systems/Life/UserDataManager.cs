@@ -90,7 +90,7 @@ namespace _Project.Scripts.Systems.Life
 
         public void SetupLifeDataIfNeeded()
         {
-            RemainingTimeForNextLife = new ReactiveProperty<int>();
+            RemainingTimeForNextLife ??= new ReactiveProperty<int>(0);
 
             var userConfig = _saveManager.Load<UserConfig>(DataConstants.SAVE_KEY_USER_CONFIG);
             if (userConfig.lifeCount >= DataConstants.USER_MAX_LIFE_COUNT)

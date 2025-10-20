@@ -47,7 +47,6 @@ namespace _Project.Scripts.UI.MenuScene
             var userConfig = _saveManager.Load<UserConfig>(DataConstants.SAVE_KEY_USER_CONFIG);
             if (userConfig.lifeCount <= 0)
             {
-                playButton.enabled = false;
                 return;
             }
 
