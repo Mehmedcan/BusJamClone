@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using _Project.Data.Constants;
 using _Project.Data.GameData;
 using _Project.Data.ScriptableObjects.Data;
@@ -186,19 +187,23 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             var currentBus = busController.GetCurrentBus();
             var matchingHolders = holderController.GetHoldersWithHumanType(_currentHumanType.Value);
             
-            // Only move stickmen up to bus capacity
-            int stickmenToMove = Mathf.Min(matchingHolders.Count, DataConstants.BUS_MAX_STICMAN_COUNT - currentBus.GetCurrentStickmanCount());
+            // Only move stickman up to bus capacity
+            var stickmenToMove = Mathf.Min(matchingHolders.Count, DataConstants.BUS_MAX_STICMAN_COUNT - currentBus.GetCurrentStickmanCount());
             
-            for (int i = 0; i < stickmenToMove; i++)
+            var moveTasks = new List<UniTask>();
+            for (var i = 0; i < stickmenToMove; i++)
             {
                 var holder = matchingHolders[i];
                 var stickman = holder.GetStickmanInstance();
                 if (stickman != null)
                 {
                     Debug.Log($"Moving stickman from holder to bus - Type: {_currentHumanType}");
-                    await MoveStickmanFromHolderToBus(stickman, holder);
+                    var moveTask = MoveStickmanFromHolderToBus(stickman, holder);
+                    moveTasks.Add(moveTask);
                 }
             }
+            
+            await UniTask.WhenAll(moveTasks);
         }
         
         private async UniTask MoveStickmanFromHolderToBus(Stickman.Stickman stickman, Holder.Holder holder)
@@ -221,7 +226,10 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             // move stickman to bus
             await stickman.MoveStickmanToPosition(currentBus.transform, 1f);
             
+            // Enable the bus's own sitting stickman and deactivate the holder's stickman
             currentBus.EnableNextStickman();
+            stickman.gameObject.SetActive(false);
+            
             holder.Vacate();
             
             // Only get next bus if current bus is now full

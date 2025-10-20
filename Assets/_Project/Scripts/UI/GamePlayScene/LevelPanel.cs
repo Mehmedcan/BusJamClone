@@ -9,7 +9,7 @@ namespace _Project.Scripts.UI.GamePlayScene
 
         public void Initialize(int level)
         {
-            levelText.text = $"LEVEL {level}";
+            levelText.text = $"LEVEL {level + 1}";
         }
     }
 }
