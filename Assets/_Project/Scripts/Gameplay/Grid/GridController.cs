@@ -72,7 +72,7 @@ namespace _Project.Scripts.Gameplay.Grid
                     neighborCoordinate.y >= 0 && neighborCoordinate.y < rows)
                 {
                     var neighborGrid = _gridMap[neighborCoordinate.x, neighborCoordinate.y];
-                    if (neighborGrid.Type == GridType.Empty)
+                    if (neighborGrid.Type == GridType.Empty || neighborGrid.Type == GridType.Processing)
                     {
                         return true;
                     }
