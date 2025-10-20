@@ -4,6 +4,7 @@ namespace _Project.Scripts.Gameplay.Grid
     {
         Fixed,
         Empty,
-        Occupied
+        Occupied,
+        Processing
     }
 }

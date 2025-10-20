@@ -87,24 +87,38 @@ namespace _Project.Scripts.Gameplay.LevelManagement
                 return;
             }
             
+            // Set grid to processing state to prevent double clicks
+            grid.SetType(GridType.Processing);
+            
             var stickman = grid.GetStickmanInstance();
             var gridHumanType = grid.GetHumanType();
             
             if (stickman == null)
             {
                 Debug.LogError("Stickman instance is null on occupied grid!");
+                // Reset to occupied if stickman is null
+                grid.SetType(GridType.Occupied);
                 return;
             }
             
-            // move to bus if types match
-            if (gridHumanType == _currentHumanType)
+            try
             {
-                await MoveStickmanToBus(stickman, grid);
+                // move to bus if types match
+                if (gridHumanType == _currentHumanType)
+                {
+                    await MoveStickmanToBus(stickman, grid);
+                }
+                // move to holder
+                else
+                {
+                    await MoveStickmanToHolder(stickman, grid);
+                }
             }
-            // move to holder
-            else
+            catch (System.Exception ex)
             {
-                await MoveStickmanToHolder(stickman, grid);
+                Debug.LogError($"Error processing grid click: {ex.Message}");
+                // Reset to occupied state on error
+                grid.SetType(GridType.Occupied);
             }
         }
         

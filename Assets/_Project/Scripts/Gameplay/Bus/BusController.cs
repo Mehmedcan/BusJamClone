@@ -71,7 +71,6 @@ namespace _Project.Scripts.Gameplay.Bus
 			// already finished, do nothing
 			if (_mainBus == null)
 			{
-				Debug.Log("ALREADY FINISHED");
 				return null;
 			}
 
@@ -103,7 +102,6 @@ namespace _Project.Scripts.Gameplay.Bus
 			await MoveBusToPosition(_mainBus, _busHumanTypes[^1], busMainTransform, busEndTransform);
 			_mainBus = null;
 			
-			Debug.Log("FINISHED");
 			return null; // No more buses
         }
         
@@ -111,8 +109,9 @@ namespace _Project.Scripts.Gameplay.Bus
         {
 	        bus.transform.position = currentTransform.position;
 	        bus.gameObject.SetActive(true);
-            
-	        bus.Initialize(humanType);
+
+	        var busNeedsInitialization = currentTransform == busSpawnTransform;
+	        if(busNeedsInitialization) bus.Initialize(humanType);
             
 	        return bus.transform.DOMove(targetTransform.position, 1f).SetEase(Ease.InOutSine).ToUniTask();
         } 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af338a75915874887897729a14675ed0, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: 
-  refillSeconds: 30
+  refillSeconds: 200
   levels:
   - levelName: Level 1
     enabled: 1
@@ -301,19 +301,19 @@ MonoBehaviour:
       humanType: 0
     - x: 7
       y: 0
-      gridType: 2
+      gridType: 0
       humanType: 1
     - x: 7
       y: 1
-      gridType: 2
+      gridType: 0
       humanType: 1
     - x: 7
       y: 2
-      gridType: 2
+      gridType: 0
       humanType: 1
     - x: 7
       y: 3
-      gridType: 2
+      gridType: 0
       humanType: 1
     - x: 7
       y: 4
