@@ -45,13 +45,48 @@ namespace _Project.Scripts.Gameplay.Grid
         {
             _onGridClicked = onGridClicked;
         }
+
+        public bool CanStickmanExit(Grid grid)
+        {
+            if (grid.Coordinates.y == 0)
+            {
+                return true;
+            }
+
+            var rows = _gridMap.GetLength(0);
+            var cols = _gridMap.GetLength(1);
+
+            Vector2Int[] directions = 
+            {
+                new Vector2Int(0, 1),  // top
+                new Vector2Int(0, -1), // bottom
+                new Vector2Int(-1, 0), // left
+                new Vector2Int(1, 0)   // right
+            };
+
+            foreach (var direction in directions)
+            {
+                var neighborCoordinate = grid.Coordinates + direction;
+
+                if (neighborCoordinate.x >= 0 && neighborCoordinate.x < cols &&
+                    neighborCoordinate.y >= 0 && neighborCoordinate.y < rows)
+                {
+                    var neighborGrid = _gridMap[neighborCoordinate.x, neighborCoordinate.y];
+                    if (neighborGrid.Type == GridType.Empty)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+
+        }
         
         private void OnGridClicked(int x, int y)
         {
             var relatedGrid = _gridMap[x, y];
             _onGridClicked?.Invoke(relatedGrid);
-            
-            Debug.Log($"Grid clicked at ({x},{y})");
         }
     }
 }

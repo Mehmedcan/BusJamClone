@@ -25,11 +25,14 @@ namespace _Project.Scripts.Gameplay.Stickman
             bodySkinnedMeshRenderer.materials = meshMaterials;
         }
 
-        public UniTask MoveStickmanToPosition(Transform targetTransform, float duration)
+        public UniTask MoveStickmanToPosition(Transform targetTransform)
         {
             SetWalkAnimation(true);
             
             var movePosition = new Vector3( targetTransform.position.x, transform.position.y, targetTransform.position.z);
+            var distance = Vector3.Distance(transform.position, movePosition);
+            var duration = distance / 12f; // 3 units per second speed
+            
             return transform.DOMove(movePosition, duration).OnComplete(() =>
             {
                 SetWalkAnimation(false);

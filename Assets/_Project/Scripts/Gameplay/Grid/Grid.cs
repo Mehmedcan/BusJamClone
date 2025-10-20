@@ -19,6 +19,7 @@ namespace _Project.Scripts.Gameplay.Grid
         public Material inUseMaterial;
         
         public GridType Type { get; private set; }
+        public Vector2Int Coordinates => _coordinates;
 
         private HumanType _humanType;
         private Stickman.Stickman _stickmanInstance;
@@ -105,6 +106,7 @@ namespace _Project.Scripts.Gameplay.Grid
                 stickman.gameObject.SetActive(false);
             }
         }
+        
         
         // --- helpers ---
         public override string ToString()

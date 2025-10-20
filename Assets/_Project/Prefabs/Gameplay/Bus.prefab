@@ -554,6 +554,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3080344750496541221}
     m_Modifications:
+    - target: {fileID: 2379954268480794533, guid: 9a03fc0a1a279490584f3723783b94d6, type: 3}
+      propertyPath: outlineColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2379954268480794533, guid: 9a03fc0a1a279490584f3723783b94d6, type: 3}
+      propertyPath: outlineColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2379954268480794533, guid: 9a03fc0a1a279490584f3723783b94d6, type: 3}
+      propertyPath: outlineColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2671250115414703123, guid: 9a03fc0a1a279490584f3723783b94d6, type: 3}
       propertyPath: m_Name
       value: SittingStickman (1)
@@ -643,6 +655,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3080344750496541221}
     m_Modifications:
+    - target: {fileID: 2379954268480794533, guid: 9a03fc0a1a279490584f3723783b94d6, type: 3}
+      propertyPath: outlineColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2379954268480794533, guid: 9a03fc0a1a279490584f3723783b94d6, type: 3}
+      propertyPath: outlineColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2379954268480794533, guid: 9a03fc0a1a279490584f3723783b94d6, type: 3}
+      propertyPath: outlineColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2671250115414703123, guid: 9a03fc0a1a279490584f3723783b94d6, type: 3}
       propertyPath: m_Name
       value: SittingStickman (3)
@@ -736,6 +760,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3080344750496541221}
     m_Modifications:
+    - target: {fileID: 2379954268480794533, guid: 9a03fc0a1a279490584f3723783b94d6, type: 3}
+      propertyPath: outlineColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2379954268480794533, guid: 9a03fc0a1a279490584f3723783b94d6, type: 3}
+      propertyPath: outlineColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2379954268480794533, guid: 9a03fc0a1a279490584f3723783b94d6, type: 3}
+      propertyPath: outlineColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2671250115414703123, guid: 9a03fc0a1a279490584f3723783b94d6, type: 3}
       propertyPath: m_Name
       value: SittingStickman (2)

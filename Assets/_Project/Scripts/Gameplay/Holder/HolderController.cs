@@ -38,20 +38,17 @@ namespace _Project.Scripts.Gameplay.Holder
         
         public Holder GetAndFillNextEmptyHolder(HumanType humanType, Stickman.Stickman stickman)
         {
-            // Find the first empty holder
-            for (int i = 0; i < _holders.Count; i++)
+            for (var i = 0; i < _holders.Count; i++)
             {
                 if (!_holders[i].IsOccupied)
                 {
                     var holder = _holders[i];
                     holder.OccupyWithStickman(humanType, stickman);
                     
-                    Debug.Log($"Filled holder {i} with {humanType} and stickman");
                     return holder;
                 }
             }
             
-            Debug.Log("All holders are full!");
             return null;
         }
         

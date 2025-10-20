@@ -74,6 +74,13 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             {
                 return;
             }
+
+            var canStickmanExit = gridController.CanStickmanExit(grid);
+            if (!canStickmanExit)
+            {
+                Debug.LogError("Stickman cannot exit from this grid!");
+                return;
+            }
             
             var stickman = grid.GetStickmanInstance();
             var gridHumanType = grid.GetHumanType();
@@ -92,7 +99,6 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             // move to holder
             else
             {
-                Debug.Log($"Moving stickman to holder - Grid Type: {gridHumanType}, Bus Type: {_currentHumanType}");
                 await MoveStickmanToHolder(stickman, grid);
             }
         }
@@ -126,7 +132,7 @@ namespace _Project.Scripts.Gameplay.LevelManagement
                 }
             }
             
-            await stickman.MoveStickmanToPosition(currentBus.transform, 1f);
+            await stickman.MoveStickmanToPosition(currentBus.transform);
             currentBus.EnableNextStickman();
             grid.ClearGrid();
             
@@ -159,7 +165,7 @@ namespace _Project.Scripts.Gameplay.LevelManagement
                 return;
             }
             
-            await stickman.MoveStickmanToPosition(holder.transform, 1f);
+            await stickman.MoveStickmanToPosition(holder.transform);
             grid.ClearGrid(shouldDeactiveStickman: false);
             
             // check for fail condition after moving to holder
@@ -216,7 +222,7 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             }
             
             // move stickman to bus
-            await stickman.MoveStickmanToPosition(currentBus.transform, 1f);
+            await stickman.MoveStickmanToPosition(currentBus.transform);
             
             // Enable the bus's own sitting stickman and deactivate the holder's stickman
             currentBus.EnableNextStickman();
