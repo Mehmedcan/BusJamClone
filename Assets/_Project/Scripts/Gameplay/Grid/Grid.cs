@@ -19,9 +19,9 @@ namespace _Project.Scripts.Gameplay.Grid
         public Material inUseMaterial;
         
         public GridType Type { get; private set; }
+
         private HumanType _humanType;
         private Stickman.Stickman _stickmanInstance;
-
         private Vector2Int _coordinates;
         private MeshRenderer _meshRenderer;
         private Action<int, int> _onClick;
@@ -92,10 +92,21 @@ namespace _Project.Scripts.Gameplay.Grid
         {
             return _humanType;
         }
-        
+
+        public void ClearGrid(bool shouldDeactiveStickman = true)
+        {
+            SetType(GridType.Empty);
+
+            if (!shouldDeactiveStickman) return;
+            
+            var stickman = GetStickmanInstance();
+            if (stickman != null)
+            {
+                stickman.gameObject.SetActive(false);
+            }
+        }
         
         // --- helpers ---
-        
         public override string ToString()
         {
             return $"GridCell ({_coordinates.x},{_coordinates.y}) | Type: {Type}";

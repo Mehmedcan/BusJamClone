@@ -70,6 +70,43 @@ namespace _Project.Scripts.Gameplay.Holder
             return matchingHolders;
         }
         
+        public bool AreAllHoldersFull()
+        {
+            foreach (var holder in _holders)
+            {
+                if (!holder.IsOccupied)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+        public bool HasHolderWithHumanType(HumanType humanType)
+        {
+            foreach (var holder in _holders)
+            {
+                if (holder.IsOccupied && holder.GetHumanType() == humanType)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        public int GetEmptyHolderCount()
+        {
+            int count = 0;
+            foreach (var holder in _holders)
+            {
+                if (!holder.IsOccupied)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+        
         private void OnHolderClicked(int index)
         {
             Debug.Log($"Holder clicked at index {index}");

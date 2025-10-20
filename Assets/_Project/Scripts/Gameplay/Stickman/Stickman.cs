@@ -12,6 +12,9 @@ namespace _Project.Scripts.Gameplay.Stickman
         [SerializeField] private Animator animator;
 
         private HumanType _type;
+        
+        private static readonly int IsWalk = Animator.StringToHash("isWalk");
+        private static readonly int IsIdle = Animator.StringToHash("isIdle");
 
         public void Initialize(HumanType type, Material typeMaterial)
         {
@@ -24,8 +27,19 @@ namespace _Project.Scripts.Gameplay.Stickman
 
         public UniTask MoveStickmanToPosition(Transform targetTransform, float duration)
         {
+            SetWalkAnimation(true);
+            
             var movePosition = new Vector3( targetTransform.position.x, transform.position.y, targetTransform.position.z);
-            return transform.DOMove(movePosition, duration).ToUniTask();
+            return transform.DOMove(movePosition, duration).OnComplete(() =>
+            {
+                SetWalkAnimation(false);
+            }).ToUniTask();
+        }
+        
+        private void SetWalkAnimation(bool isWalking)
+        {
+            animator.SetBool(IsWalk, isWalking);
+            animator.SetBool(IsIdle, !isWalking);
         }
     }
 }
