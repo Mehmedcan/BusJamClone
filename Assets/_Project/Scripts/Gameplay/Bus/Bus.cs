@@ -62,7 +62,7 @@ namespace _Project.Scripts.Gameplay.Bus
         
         public void EnableNextStickman()
         {
-            if (_stickmanCount < DataConstants.BUS_MAX_STICMAN_COUNT)
+            if (_stickmanCount < GameConstants.BUS_MAX_STICMAN_COUNT)
             {
                 sittingStickmans[_stickmanCount].gameObject.SetActive(true);
                 _stickmanCount++;
@@ -71,7 +71,7 @@ namespace _Project.Scripts.Gameplay.Bus
         
         public bool IsFull()
         {
-            return _stickmanCount >= DataConstants.BUS_MAX_STICMAN_COUNT;
+            return _stickmanCount >= GameConstants.BUS_MAX_STICMAN_COUNT;
         }
         
         public int GetCurrentStickmanCount()

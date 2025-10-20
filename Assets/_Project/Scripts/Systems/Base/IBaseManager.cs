@@ -1,4 +1,3 @@
-
 using Cysharp.Threading.Tasks;
 
 namespace _Project.Scripts.Systems.Base
@@ -7,7 +6,6 @@ namespace _Project.Scripts.Systems.Base
     {
         string LogTag { get; }
         UniTask AsyncInitialize();
-
         void Initialize();
         
         void Dispose();

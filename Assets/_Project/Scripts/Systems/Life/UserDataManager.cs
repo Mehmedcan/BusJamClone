@@ -54,7 +54,7 @@ namespace _Project.Scripts.Systems.Life
         
         public (UserConfig, int/*earned gold*/) WinLevel()
         {
-            var userConfig = _saveManager.Load<UserConfig>(DataConstants.SAVE_KEY_USER_CONFIG);
+            var userConfig = _saveManager.Load<UserConfig>(GameConstants.SAVE_KEY_USER_CONFIG);
             var levelData =_gameData.levels[ userConfig.level];
 
             var currentLevelGoldCount = levelData.goldCount;
@@ -68,7 +68,7 @@ namespace _Project.Scripts.Systems.Life
                 lastFailTime = userConfig.lastFailTime
             };
             
-            _saveManager.Save(DataConstants.SAVE_KEY_USER_CONFIG, newUserConfig);
+            _saveManager.Save(GameConstants.SAVE_KEY_USER_CONFIG, newUserConfig);
             
             return (newUserConfig, currentLevelGoldCount);
         }
@@ -78,22 +78,22 @@ namespace _Project.Scripts.Systems.Life
             ChangeUserLifeCount(-1);
             SetupLifeDataIfNeeded();
             
-            var userConfig = _saveManager.Load<UserConfig>(DataConstants.SAVE_KEY_USER_CONFIG);
+            var userConfig = _saveManager.Load<UserConfig>(GameConstants.SAVE_KEY_USER_CONFIG);
             return userConfig;
         }
         
         // --- Life Management ---
         private void LoadGameData()
         {
-            _gameData = Resources.Load<GameData>(DataConstants.GAME_CONFIG_PATH);
+            _gameData = Resources.Load<GameData>(GameConstants.GAME_CONFIG_PATH);
         }
 
         public void SetupLifeDataIfNeeded()
         {
             RemainingTimeForNextLife ??= new ReactiveProperty<int>(0);
 
-            var userConfig = _saveManager.Load<UserConfig>(DataConstants.SAVE_KEY_USER_CONFIG);
-            if (userConfig.lifeCount >= DataConstants.USER_MAX_LIFE_COUNT)
+            var userConfig = _saveManager.Load<UserConfig>(GameConstants.SAVE_KEY_USER_CONFIG);
+            if (userConfig.lifeCount >= GameConstants.USER_MAX_LIFE_COUNT)
             {
                 return;
             }
@@ -105,9 +105,9 @@ namespace _Project.Scripts.Systems.Life
             var nextLifeRemainingSeconds = userLifeRefillSeconds - (elapsedTime % userLifeRefillSeconds);
 
             // max refilled
-            if (refillCount >= (DataConstants.USER_MAX_LIFE_COUNT - userConfig.lifeCount))
+            if (refillCount >= (GameConstants.USER_MAX_LIFE_COUNT - userConfig.lifeCount))
             {
-                ChangeUserLifeCount(DataConstants.USER_MAX_LIFE_COUNT);
+                ChangeUserLifeCount(GameConstants.USER_MAX_LIFE_COUNT);
                 return;
             }
             else if (refillCount > 0)
@@ -133,18 +133,18 @@ namespace _Project.Scripts.Systems.Life
         
         private void ChangeUserLifeCount(int changeAmount)
         {
-            var userConfig = _saveManager.Load<UserConfig>(DataConstants.SAVE_KEY_USER_CONFIG);
+            var userConfig = _saveManager.Load<UserConfig>(GameConstants.SAVE_KEY_USER_CONFIG);
 
             var isLifeIncreasing = changeAmount > 0;
-            var isDecreaseFromFull = changeAmount < 0 && userConfig.lifeCount == DataConstants.USER_MAX_LIFE_COUNT;
+            var isDecreaseFromFull = changeAmount < 0 && userConfig.lifeCount == GameConstants.USER_MAX_LIFE_COUNT;
             
             if (isLifeIncreasing || isDecreaseFromFull)
             {
                 userConfig.lastFailTime = DateTime.UtcNow;
             }
 
-            userConfig.lifeCount = Mathf.Min(userConfig.lifeCount + changeAmount, DataConstants.USER_MAX_LIFE_COUNT);
-            _saveManager.Save(DataConstants.SAVE_KEY_USER_CONFIG, userConfig);
+            userConfig.lifeCount = Mathf.Min(userConfig.lifeCount + changeAmount, GameConstants.USER_MAX_LIFE_COUNT);
+            _saveManager.Save(GameConstants.SAVE_KEY_USER_CONFIG, userConfig);
             
             OnUserLifeChanged?.Invoke(this, userConfig);
         }

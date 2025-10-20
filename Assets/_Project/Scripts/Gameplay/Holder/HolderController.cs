@@ -14,7 +14,7 @@ namespace _Project.Scripts.Gameplay.Holder
         public float padding;
         
         private List<Holder> _holders = new();
-  
+        
         
         public void CreateHolders(int holderCount)
         {
@@ -29,7 +29,7 @@ namespace _Project.Scripts.Gameplay.Holder
                 );
 
                 var newHolder = Instantiate(holderPrefab, position, Quaternion.identity, transform);
-                newHolder.Initialize(i, OnHolderClicked);
+                newHolder.Initialize(i);
 
                 newHolder.name = $"Holder {i}";
                 _holders.Add(newHolder);
@@ -93,7 +93,7 @@ namespace _Project.Scripts.Gameplay.Holder
         
         public int GetEmptyHolderCount()
         {
-            int count = 0;
+            var count = 0;
             foreach (var holder in _holders)
             {
                 if (!holder.IsOccupied)
@@ -102,11 +102,6 @@ namespace _Project.Scripts.Gameplay.Holder
                 }
             }
             return count;
-        }
-        
-        private void OnHolderClicked(int index)
-        {
-            Debug.Log($"Holder clicked at index {index}");
         }
     }
 }

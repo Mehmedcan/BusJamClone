@@ -39,29 +39,20 @@ namespace _Project.Scripts.Gameplay.Bus
             _totalBusCount = busCount;
             _busHumanTypes = busHumanTypes;
         }
-
-        // TODO: Delete this Update method later
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                GetNextBus().Forget();
-            }
-        }
         
         public async UniTask<HumanType?> GetNextBus()
         {
 			// initial setup: spawn the first (main) bus, and optionally the waiting bus
 			if (_currentBusCount == 0)
 			{
-				_mainBus = _poolManager.Get(DataConstants.BUS_POOL_KEY, transform).GetComponent<Bus>();
+				_mainBus = _poolManager.Get(GameConstants.BUS_POOL_KEY, transform).GetComponent<Bus>();
 				await MoveBusToPosition(_mainBus, _busHumanTypes[_currentBusCount], busSpawnTransform, busMainTransform);
 				_currentBusCount++;
 
 				if (_totalBusCount > 1)
 				{
 					await UniTask.Delay(DelayBetweenBusSpawns);
-					_waitingBus = _poolManager.Get(DataConstants.BUS_POOL_KEY, transform).GetComponent<Bus>();
+					_waitingBus = _poolManager.Get(GameConstants.BUS_POOL_KEY, transform).GetComponent<Bus>();
 					await MoveBusToPosition(_waitingBus, _busHumanTypes[_currentBusCount], busSpawnTransform, busWaitTransform);
 					_currentBusCount++;
 				}
@@ -90,7 +81,7 @@ namespace _Project.Scripts.Gameplay.Bus
 				if (_currentBusCount < _totalBusCount)
 				{
 					await UniTask.Delay(DelayBetweenBusSpawns);
-					_waitingBus = _poolManager.Get(DataConstants.BUS_POOL_KEY, transform).GetComponent<Bus>();
+					_waitingBus = _poolManager.Get(GameConstants.BUS_POOL_KEY, transform).GetComponent<Bus>();
 					await MoveBusToPosition(_waitingBus, _busHumanTypes[_currentBusCount], busSpawnTransform, busWaitTransform);
 					_currentBusCount++;
 				}

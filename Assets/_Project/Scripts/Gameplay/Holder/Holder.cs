@@ -1,4 +1,3 @@
-using System;
 using _Project.Scripts.Gameplay.Human;
 using UnityEngine;
 
@@ -10,13 +9,11 @@ namespace _Project.Scripts.Gameplay.Holder
 
         private HumanType _humanType;
         private int _order;
-        private Action<int> _onClick;
         private Stickman.Stickman _stickmanInstance;
         
-        public void Initialize(int order, Action<int> onClick)
+        public void Initialize(int order)
         {
             _order = order;
-            _onClick = onClick;
         }
 
         public void OccupyWithStickman(HumanType humanType, Stickman.Stickman stickman)
@@ -46,11 +43,6 @@ namespace _Project.Scripts.Gameplay.Holder
         public override string ToString()
         {
             return $"Holder {_order} | Occupied: {IsOccupied} | HumanType: {_humanType}";
-        }
-        
-        private void OnMouseDown()
-        {
-            _onClick?.Invoke(_order);
         }
     }
 }

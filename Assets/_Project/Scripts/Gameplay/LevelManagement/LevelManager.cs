@@ -9,7 +9,7 @@ using _Project.Scripts.Gameplay.Holder;
 using _Project.Scripts.Gameplay.Human;
 using _Project.Scripts.Systems.Life;
 using _Project.Scripts.Systems.Save;
-using _Project.Scripts.UI.GamePlayScene;
+using _Project.Scripts.UI.Views;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UniRx;
@@ -51,22 +51,23 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             StartLevel().Forget();
         }
         
+        private void SetupData()
+        {
+            Locator.Instance.TryResolve(out _saveManager);
+            Locator.Instance.TryResolve(out _userDataManager);
+            
+            _gameData = Resources.Load<GameData>(GameConstants.GAME_CONFIG_PATH);
+            _userConfig = _saveManager.Load<UserConfig>(GameConstants.SAVE_KEY_USER_CONFIG);
+            _levelConfig = _gameData.levels[_userConfig.level];
+        }
+
         private async UniTask StartLevel()
         {
             _currentHumanType = await busController.GetNextBus();
             
             _levelState.SetValueAndForceNotify(LevelState.WaitingForInput);
         }
-
-        private void SetupData()
-        {
-            Locator.Instance.TryResolve(out _saveManager);
-            Locator.Instance.TryResolve(out _userDataManager);
-            
-            _gameData = Resources.Load<GameData>(DataConstants.GAME_CONFIG_PATH);
-            _userConfig = _saveManager.Load<UserConfig>(DataConstants.SAVE_KEY_USER_CONFIG);
-            _levelConfig = _gameData.levels[_userConfig.level];
-        }
+        
         
         private async void OnGridClick(Grid.Grid grid)
         {
@@ -81,13 +82,12 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             }
 
             var canStickmanExit = gridController.CanStickmanExit(grid);
-            if (!canStickmanExit)
+            if (!canStickmanExit) // do nothing if the stickman cannot exit
             {
-                Debug.LogError("Stickman cannot exit from this grid!");
                 return;
             }
             
-            // Set grid to processing state to prevent double clicks
+            
             grid.SetType(GridType.Processing);
             
             var stickman = grid.GetStickmanInstance();
@@ -95,15 +95,14 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             
             if (stickman == null)
             {
-                Debug.LogError("Stickman instance is null on occupied grid!");
-                // Reset to occupied if stickman is null
                 grid.SetType(GridType.Occupied);
                 return;
             }
             
+            
             try
             {
-                // move to bus if types match
+                // move to bus
                 if (gridHumanType == _currentHumanType)
                 {
                     await MoveStickmanToBus(stickman, grid);
@@ -117,7 +116,6 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             catch (System.Exception ex)
             {
                 Debug.LogError($"Error processing grid click: {ex.Message}");
-                // Reset to occupied state on error
                 grid.SetType(GridType.Occupied);
             }
         }
@@ -134,7 +132,6 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             
             if (currentBus.IsFull())
             {
-                Debug.Log("Current bus is full, getting next bus");
                 _currentHumanType = await busController.GetNextBus();
                 
                 if (_currentHumanType == null)
@@ -146,7 +143,6 @@ namespace _Project.Scripts.Gameplay.LevelManagement
                 currentBus = busController.GetCurrentBus();
                 if (currentBus == null)
                 {
-                    Debug.LogError("No bus available after getting next bus!");
                     return;
                 }
             }
@@ -155,7 +151,7 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             currentBus.EnableNextStickman();
             grid.ClearGrid();
             
-            // Only get next bus if current bus is now full
+            // if bus is full after adding stickman, get next bus
             if (currentBus.IsFull())
             {
                 _currentHumanType = await busController.GetNextBus();
@@ -179,7 +175,6 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             
             if (holder == null)
             {
-                Debug.LogError("No empty holder available!");
                 CheckForFailCondition();
                 return;
             }
@@ -206,7 +201,7 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             var currentBus = busController.GetCurrentBus();
             var matchingHolders = holderController.GetHoldersWithHumanType(_currentHumanType.Value);
             
-            var stickmanCountToMove = Mathf.Min(matchingHolders.Count, DataConstants.BUS_MAX_STICMAN_COUNT - currentBus.GetCurrentStickmanCount());
+            var stickmanCountToMove = Mathf.Min(matchingHolders.Count, GameConstants.BUS_MAX_STICMAN_COUNT - currentBus.GetCurrentStickmanCount());
             
             var moveTasks = new List<UniTask>();
             for (var i = 0; i < stickmanCountToMove; i++)
@@ -284,7 +279,7 @@ namespace _Project.Scripts.Gameplay.LevelManagement
 
         private void FinishLevel(bool isWin)
         {
-            if(_levelState.Value == LevelState.LevelCompleted || _levelState.Value == LevelState.LevelFailed) return;
+            if(_levelState.Value is LevelState.LevelCompleted or LevelState.LevelFailed) return;
             
             var levelStateType = isWin ? LevelState.LevelCompleted : LevelState.LevelFailed;
             _levelState.SetValueAndForceNotify(levelStateType);

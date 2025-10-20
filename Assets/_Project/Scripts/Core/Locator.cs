@@ -8,7 +8,6 @@ namespace _Project.Scripts.Core
     {
         static Locator instance;
         static object syncRoot = new();
-
         
         private static readonly Dictionary<Type, object> _managerMap = new();
 

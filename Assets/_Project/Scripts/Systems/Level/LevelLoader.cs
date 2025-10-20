@@ -44,11 +44,11 @@ namespace _Project.Scripts.Systems.Level
        
        private void LoadLevel()
        {
-           var userData = _saveManager.Load<UserConfig>(DataConstants.SAVE_KEY_USER_CONFIG);
+           var userData = _saveManager.Load<UserConfig>(GameConstants.SAVE_KEY_USER_CONFIG);
            var levelData = gameData.levels[userData.level];
            
-           _poolManager.CreatePool(DataConstants.STICKMAN_POOL_KEY, stickmanPrefab, StickmanPoolInitialSize);
-           _poolManager.CreatePool(DataConstants.BUS_POOL_KEY, busPrefab, BusPoolInitialSize);
+           _poolManager.CreatePool(GameConstants.STICKMAN_POOL_KEY, stickmanPrefab, StickmanPoolInitialSize);
+           _poolManager.CreatePool(GameConstants.BUS_POOL_KEY, busPrefab, BusPoolInitialSize);
            
            var gridSizeData = new Vector2Int(levelData.width, levelData.height);
            gridController.CreateGridBoard(gridSizeData, levelData.cells, 0.1f);

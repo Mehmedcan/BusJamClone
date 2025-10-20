@@ -9,7 +9,6 @@ namespace _Project.Scripts.Systems.SceneLoad
     {
         public string LogTag => "[SceneManager]";
         
-        public float Progress { get; private set; }
         private readonly ReactiveProperty<float> ProgressStream = new(0f);
         private readonly Subject<string> SceneLoaded = new();
 

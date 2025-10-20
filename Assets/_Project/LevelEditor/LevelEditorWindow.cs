@@ -156,7 +156,7 @@ namespace _Project.LevelEditor
                         GUILayout.FlexibleSpace();
                         level.enabled = EditorGUILayout.ToggleLeft("Enabled", level.enabled, GUILayout.Width(100));
 
-                        if (GUILayout.Button("Sil", GUILayout.Width(60)))
+                        if (GUILayout.Button("Delete", GUILayout.Width(60)))
                         {
                             if (EditorUtility.DisplayDialog("Delete Level", $"Delete {level.levelName} level?", "Yes", "No"))
                             {
@@ -398,9 +398,6 @@ namespace _Project.LevelEditor
             }
             return null;
         }
-
-        // Randomized color cache per HumanType for Occupied cells
-        private static readonly Dictionary<HumanType, Color> _humanTypeColors = new();
 
         private static Color GetHumanColor(HumanType humanType)
         {

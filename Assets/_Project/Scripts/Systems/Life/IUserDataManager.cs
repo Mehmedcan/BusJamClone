@@ -12,6 +12,5 @@ namespace _Project.Scripts.Systems.Life
         
         public (UserConfig, int/*earned gold*/) WinLevel();
         public UserConfig LoseLevel();
-        public void SetupLifeDataIfNeeded();
     }
 }

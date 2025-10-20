@@ -27,7 +27,7 @@ namespace _Project.Scripts.Gameplay.Grid
         private MeshRenderer _meshRenderer;
         private Action<int, int> _onClick;
         
-        // Data
+        // Data for stickman transform
         private static readonly Vector3 StickmanLocalPosition = new Vector3(0, 0.5f, 0);
         private static readonly Vector3 StickmanLocalRotation = new Vector3(0, 0, 0);
         private static readonly Vector3 StickmanLocalScale = new Vector3(.68f, 3.4f, .68f);
@@ -74,7 +74,7 @@ namespace _Project.Scripts.Gameplay.Grid
                 return;
             }
 
-            var stickman = _poolManager.Get(DataConstants.STICKMAN_POOL_KEY, transform);
+            var stickman = _poolManager.Get(GameConstants.STICKMAN_POOL_KEY, transform);
             stickman.transform.localPosition = StickmanLocalPosition;
             stickman.transform.localEulerAngles = StickmanLocalRotation;
             stickman.transform.localScale = StickmanLocalScale;

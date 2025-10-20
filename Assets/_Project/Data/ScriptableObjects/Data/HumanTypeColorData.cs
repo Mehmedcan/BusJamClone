@@ -48,7 +48,7 @@ namespace _Project.Data.ScriptableObjects.Data
                 return mat;
             }
 
-            Debug.LogWarning($"[BusColorData] Material not found for HumanType: {type}");
+            Debug.LogError($"[BusColorData] Material not found for HumanType: {type}");
             return null;
         }
 

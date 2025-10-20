@@ -37,8 +37,6 @@ namespace _Project.Scripts.Gameplay.Grid
                     gridIndex++;
                 }
             }
-            
-            
         }
         
         public void SetGridClick(Action<Grid> onGridClicked)
