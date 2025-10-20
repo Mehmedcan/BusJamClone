@@ -4,7 +4,7 @@ using _Project.Data.GameData;
 using _Project.Data.ScriptableObjects.Data;
 using _Project.Scripts.Core;
 using _Project.Scripts.Systems.Save;
-using _Project.Scripts.Systems.Timer;
+using _Project.Scripts.Systems.Time;
 using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;

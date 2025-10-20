@@ -2,7 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using UniRx;
 
-namespace _Project.Scripts.Systems.Timer
+namespace _Project.Scripts.Systems.Time
 {
     public class TimeManager : ITimeManager
     {

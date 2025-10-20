@@ -1,7 +1,7 @@
 using System;
 using _Project.Scripts.Systems.Base;
 
-namespace _Project.Scripts.Systems.Timer
+namespace _Project.Scripts.Systems.Time
 {
     public interface ITimeManager : IBaseManager
     {

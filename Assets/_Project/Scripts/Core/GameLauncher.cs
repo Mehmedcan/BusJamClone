@@ -2,7 +2,7 @@ using _Project.Scripts.Systems.Life;
 using _Project.Scripts.Systems.Pooling;
 using _Project.Scripts.Systems.Save;
 using _Project.Scripts.Systems.SceneLoad;
-using _Project.Scripts.Systems.Timer;
+using _Project.Scripts.Systems.Time;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
