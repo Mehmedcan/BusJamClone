@@ -16,6 +16,7 @@ namespace _Project.Scripts.Gameplay.Bus
         [SerializeField] private List<Stickman.Stickman> sittingStickmans;
 
         private int _stickmanCount;
+        private int _pendingStickmanCount;
         private HumanType _busType;
 
         public void Initialize(HumanType busType)
@@ -53,6 +54,7 @@ namespace _Project.Scripts.Gameplay.Bus
         private void ResetStickmans()
         {
             _stickmanCount = 0;
+            _pendingStickmanCount = 0;
             
             foreach (var stickman in sittingStickmans)
             {
@@ -74,9 +76,32 @@ namespace _Project.Scripts.Gameplay.Bus
             return _stickmanCount >= GameConstants.BUS_MAX_STICMAN_COUNT;
         }
         
+        public bool CanAcceptStickman()
+        {
+            return (_stickmanCount + _pendingStickmanCount) < GameConstants.BUS_MAX_STICMAN_COUNT;
+        }
+        
+        public void ReserveStickmanSlot()
+        {
+            _pendingStickmanCount++;
+        }
+        
+        public void ConfirmStickmanArrival()
+        {
+            if (_pendingStickmanCount > 0)
+            {
+                _pendingStickmanCount--;
+            }
+        }
+        
         public int GetCurrentStickmanCount()
         {
             return _stickmanCount;
+        }
+        
+        public int GetPendingStickmanCount()
+        {
+            return _pendingStickmanCount;
         }
         
         public HumanType GetBusType()

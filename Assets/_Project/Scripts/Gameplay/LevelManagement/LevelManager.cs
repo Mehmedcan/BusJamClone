@@ -90,18 +90,25 @@ namespace _Project.Scripts.Gameplay.LevelManagement
                 return;
             }
             
-            
-            grid.SetType(GridType.Processing);
-            
             var stickman = grid.GetStickmanInstance();
             var gridHumanType = grid.GetHumanType();
             
             if (stickman == null)
             {
-                grid.SetType(GridType.Occupied);
                 return;
             }
             
+            if (gridHumanType == _currentHumanType)
+            {
+                var currentBus = busController.GetCurrentBus();
+                if (currentBus != null && !currentBus.CanAcceptStickman())
+                {
+                    _levelState.SetValueAndForceNotify(LevelState.WaitingForBus);
+                    return;
+                }
+            }
+            
+            grid.SetType(GridType.Processing);
             
             try
             {
@@ -133,35 +140,16 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             
             var currentBus = busController.GetCurrentBus();
             
-            if (currentBus.IsFull())
-            {
-                // Set state to WaitingForBus while bus is moving
-                _levelState.SetValueAndForceNotify(LevelState.WaitingForBus);
-                
-                _currentHumanType = await busController.GetNextBus();
-                
-                if (_currentHumanType == null)
-                {
-                    FinishLevel(isWin: true);
-                    return;
-                }
-                
-                currentBus = busController.GetCurrentBus();
-                if (currentBus == null)
-                {
-                    _levelState.SetValueAndForceNotify(LevelState.WaitingForInput);
-                    return;
-                }
-            }
-            
+            currentBus.ReserveStickmanSlot();
             await stickman.MoveStickmanToPosition(currentBus.transform);
+            
+            currentBus.ConfirmStickmanArrival();
             currentBus.EnableNextStickman();
+            
             grid.ClearGrid();
             
-            // if bus is full after adding stickman, get next bus
             if (currentBus.IsFull())
             {
-                // Set state to WaitingForBus while bus is moving
                 _levelState.SetValueAndForceNotify(LevelState.WaitingForBus);
                 
                 _currentHumanType = await busController.GetNextBus();
