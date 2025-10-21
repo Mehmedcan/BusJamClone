@@ -19,3 +19,7 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: 994ef4269eb1d4de0b590dc62477e90f, type: 2}
   - humanType: 2
     material: {fileID: 2100000, guid: 3409918d67b124e7a90d26850fd58a4e, type: 2}
+  - humanType: 3
+    material: {fileID: 2100000, guid: 688ee9d854a3a4877a460102bfe5bed2, type: 2}
+  - humanType: 4
+    material: {fileID: 2100000, guid: 6809ddaac9a34419e81db448894ebeec, type: 2}

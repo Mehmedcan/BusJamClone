@@ -4,6 +4,8 @@ namespace _Project.Scripts.Gameplay.Human
     {
         Blue,
         Green,
-        Red
+        Red,
+        Yellow,
+        Purple
     }
 }

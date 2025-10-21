@@ -53,6 +53,7 @@ namespace _Project.Scripts.Gameplay.Grid
 
         public bool CanStickmanExit(Grid grid)
         {
+            // already top
             if (grid.Coordinates.y == 0)
             {
                 return true;
@@ -61,31 +62,56 @@ namespace _Project.Scripts.Gameplay.Grid
             var rows = _gridMap.GetLength(0);
             var cols = _gridMap.GetLength(1);
 
+            // bfs init
+            var visited = new bool[rows, cols];
+            var queue = new Queue<Vector2Int>();
+            
+            // start
+            queue.Enqueue(grid.Coordinates);
+            visited[grid.Coordinates.x, grid.Coordinates.y] = true;
+
             Vector2Int[] directions = 
             {
-                new Vector2Int(0, 1),  // top
-                new Vector2Int(0, -1), // bottom
-                new Vector2Int(-1, 0), // left
-                new Vector2Int(1, 0)   // right
+                new Vector2Int(0, -1),
+                new Vector2Int(0, 1),
+                new Vector2Int(-1, 0),
+                new Vector2Int(1, 0)
             };
 
-            foreach (var direction in directions)
+            while (queue.Count > 0)
             {
-                var neighborCoordinate = grid.Coordinates + direction;
-
-                if (neighborCoordinate.x >= 0 && neighborCoordinate.x < cols &&
-                    neighborCoordinate.y >= 0 && neighborCoordinate.y < rows)
+                var currentPos = queue.Dequeue();
+                
+                foreach (var direction in directions)
                 {
-                    var neighborGrid = _gridMap[neighborCoordinate.x, neighborCoordinate.y];
-                    if (neighborGrid.Type == GridType.Empty || neighborGrid.Type == GridType.Processing)
+                    var neighborPos = currentPos + direction;
+                    
+                    if (neighborPos.x >= 0 && neighborPos.x < rows && 
+                        neighborPos.y >= 0 && neighborPos.y < cols)
                     {
-                        return true;
+                        // skip if already visited
+                        if (visited[neighborPos.x, neighborPos.y])
+                            continue;
+                            
+                        var neighborGrid = _gridMap[neighborPos.x, neighborPos.y];
+                        
+                        if (neighborGrid.Type == GridType.Empty || neighborGrid.Type == GridType.Processing)
+                        {
+                            // If reached y=0, exit
+                            if (neighborPos.y == 0)
+                            {
+                                return true;
+                            }
+                            
+                            // mark as visited
+                            visited[neighborPos.x, neighborPos.y] = true;
+                            queue.Enqueue(neighborPos);
+                        }
                     }
                 }
             }
 
             return false;
-
         }
         
         private void OnGridClicked(int x, int y)

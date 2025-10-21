@@ -409,6 +409,10 @@ namespace _Project.LevelEditor
                     return Color.green;
                 case HumanType.Red:
                     return Color.red;
+                case HumanType.Yellow:
+                    return Color.yellow;
+                case HumanType.Purple:
+                    return new Color(0.5f, 0f, 0.5f);
                 default:
                     return Color.white;
             }
