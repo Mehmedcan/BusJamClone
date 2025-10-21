@@ -79,13 +79,13 @@ namespace _Project.Scripts.Gameplay.LevelManagement
                 return;
             }
             
-            if (grid.Type != GridType.Occupied) // do nothing if the grid is not occupied
+            if (grid.Type != GridType.Occupied)
             {
                 return;
             }
 
             var canStickmanExit = gridController.CanStickmanExit(grid);
-            if (!canStickmanExit) // do nothing if the stickman cannot exit
+            if (!canStickmanExit)
             {
                 return;
             }
@@ -163,13 +163,11 @@ namespace _Project.Scripts.Gameplay.LevelManagement
                     await CheckHoldersForMatchingBus();
                     CheckForFailCondition();
                     
-                    // Return to WaitingForInput after all operations are complete
                     _levelState.SetValueAndForceNotify(LevelState.WaitingForInput);
                 }
             }
             else
             {
-                // Return to WaitingForInput if bus is not full
                 _levelState.SetValueAndForceNotify(LevelState.WaitingForInput);
             }
         }
@@ -234,26 +232,23 @@ namespace _Project.Scripts.Gameplay.LevelManagement
             
             var currentBus = busController.GetCurrentBus();
             
-            // Check if bus is full before moving
             if (currentBus.IsFull())
             {
                 Debug.Log("Bus is full, cannot move stickman from holder");
                 return;
             }
             
-            // move stickman to bus
+
             await stickman.MoveStickmanToPosition(currentBus.transform);
             
-            // Enable the bus's own sitting stickman and deactivate the holder's stickman
             currentBus.EnableNextStickman();
             stickman.gameObject.SetActive(false);
             
             holder.Vacate();
             
-            // Only get next bus if current bus is now full
+            // if current is full, get next bus
             if (currentBus.IsFull())
             {
-                // Set state to WaitingForBus while bus is moving
                 _levelState.SetValueAndForceNotify(LevelState.WaitingForBus);
                 
                 _currentHumanType = await busController.GetNextBus();
@@ -266,10 +261,8 @@ namespace _Project.Scripts.Gameplay.LevelManagement
                 {
                     await CheckHoldersForMatchingBus();
                     
-                    // Check for fail condition after bus change
                     CheckForFailCondition();
                     
-                    // Return to WaitingForInput after all operations are complete
                     _levelState.SetValueAndForceNotify(LevelState.WaitingForInput);
                 }
             }
@@ -277,8 +270,10 @@ namespace _Project.Scripts.Gameplay.LevelManagement
         
         private void CheckForFailCondition()
         {
-            // all holders are full AND the current bus type has no matching holders
-            if (holderController.AreAllHoldersFull() && _currentHumanType.HasValue)
+            var isAllHoldersFull = holderController.AreAllHoldersFull();
+            var currentBusExists = _currentHumanType.HasValue;
+           
+            if (isAllHoldersFull && currentBusExists)
             {
                 var hasMatchingHolder = holderController.HasHolderWithHumanType(_currentHumanType.Value);
                 

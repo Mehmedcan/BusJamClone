@@ -57,7 +57,7 @@ namespace _Project.Scripts.Gameplay.Bus
 					await MoveBusToPosition(_waitingBus, _busHumanTypes[_currentBusCount], busSpawnTransform, busWaitTransform);
 					_currentBusCount++;
 				}
-				return _busHumanTypes[0]; // Return the first bus type
+				return _busHumanTypes[0];
 			}
 
 			// already finished, do nothing
@@ -87,14 +87,14 @@ namespace _Project.Scripts.Gameplay.Bus
 					_currentBusCount++;
 				}
 
-				return _busHumanTypes[waitingIndex]; // Return the new main bus type
+				return _busHumanTypes[waitingIndex];
 			}
 
-			// Case 2: No waiting bus remains. Move the last main bus to end and finish.
+			// case 2: no waiting bus remains, move the last main bus to end and finish.
 			await MoveBusToPosition(_mainBus, _busHumanTypes[^1], busMainTransform, busEndTransform);
 			_mainBus = null;
 			
-			return null; // No more buses
+			return null; // no more
         }
         
         private UniTask MoveBusToPosition(Bus bus, HumanType humanType, Transform currentTransform, Transform targetTransform)

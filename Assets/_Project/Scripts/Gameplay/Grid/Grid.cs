@@ -105,16 +105,14 @@ namespace _Project.Scripts.Gameplay.Grid
             }
         }
         
-        
-        // --- helpers ---
-        public override string ToString()
-        {
-            return $"GridCell ({_coordinates.x},{_coordinates.y}) | Type: {Type}";
-        }
-
         private void OnMouseDown()
         {
             _onClick?.Invoke(_coordinates.x, _coordinates.y);
+        }
+
+        public override string ToString()
+        {
+            return $"GridCell ({_coordinates.x},{_coordinates.y}) | Type: {Type}";
         }
     }
 }
