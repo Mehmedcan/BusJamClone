@@ -105,7 +105,7 @@ namespace _Project.Scripts.Gameplay.Bus
 	        var busNeedsInitialization = currentTransform == busSpawnTransform;
 	        if(busNeedsInitialization) bus.Initialize(humanType);
             
-	        return bus.transform.DOMove(targetTransform.position, 1f).SetEase(Ease.InOutSine).ToUniTask();
+	        return bus.transform.DOMove(targetTransform.position, 0.5f).SetEase(Ease.InOutSine).ToUniTask();
         } 
 
         public Bus GetCurrentBus()

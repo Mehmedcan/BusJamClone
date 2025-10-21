@@ -31,7 +31,7 @@ namespace _Project.Scripts.Gameplay.Stickman
             
             var movePosition = new Vector3( targetTransform.position.x, transform.position.y, targetTransform.position.z);
             var distance = Vector3.Distance(transform.position, movePosition);
-            var duration = distance / 12f; // 3 units per second speed
+            var duration = distance / 15f; // 15 units per second speed
             
             return transform.DOMove(movePosition, duration).OnComplete(() =>
             {
